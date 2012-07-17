@@ -1,0 +1,55 @@
+\setlength{\unitlength}{0.001cm}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined
+% extract first six characters in \fmtname
+\def\x#1#2#3#4#5#6#7\relax{\def\x{#1#2#3#4#5#6}}%
+\expandafter\x\fmtname xxxxxx\relax \def\y{splain}%
+\ifx\x\y   % LaTeX or SliTeX?
+\gdef\SetFigFont#1#2#3{%
+  \ifnum #1<17\tiny\else \ifnum #1<20\small\else
+  \ifnum #1<24\normalsize\else \ifnum #1<29\large\else
+  \ifnum #1<34\Large\else \ifnum #1<41\LARGE\else
+     \huge\fi\fi\fi\fi\fi\fi
+  \csname #3\endcsname}%
+\else
+\gdef\SetFigFont#1#2#3{\begingroup
+  \count@#1\relax \ifnum 25<\count@\count@25\fi
+  \def\x{\endgroup\@setsize\SetFigFont{#2pt}}%
+  \expandafter\x
+    \csname \romannumeral\the\count@ pt\expandafter\endcsname
+    \csname @\romannumeral\the\count@ pt\endcsname
+  \csname #3\endcsname}%
+\fi
+\fi\endgroup
+{\renewcommand{\dashlinestretch}{30}
+\begin{picture}(3666,7281)(0,-10)
+\Thicklines
+\path(33,3633)(3633,3633)(3633,1833)
+	(33,1833)(33,3633)
+\path(33,1833)(3633,1833)(3633,33)
+	(33,33)(33,1833)
+\thinlines
+\path(633,7233)(633,33)
+\path(1233,7233)(1233,33)
+\path(1833,7233)(1833,33)
+\path(2433,7233)(2433,33)
+\path(3033,7233)(3033,33)
+\path(33,6633)(3633,6633)
+\path(33,6033)(3633,6033)
+\path(33,4833)(3633,4833)
+\path(33,4233)(3633,4233)
+\path(33,3033)(3633,3033)
+\path(33,2433)(3633,2433)
+\path(33,1233)(3633,1233)
+\path(33,633)(3633,633)
+\Thicklines
+\path(33,7233)(3633,7233)(3633,5433)
+	(33,5433)(33,7233)
+\path(33,5433)(3633,5433)(3633,3633)
+	(33,3633)(33,5433)
+\put(1533,6183){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}CPU 1}}}}}
+\put(1533,4383){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}CPU 2}}}}}
+\put(1533,2658){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}CPU 3}}}}}
+\put(1533,858){\makebox(0,0)[lb]{\smash{{{\SetFigFont{12}{14.4}{rm}CPU 4}}}}}
+\end{picture}
+}

@@ -1,0 +1,58 @@
+% GNUPLOT: LaTeX picture using EEPIC macros
+\setlength{\unitlength}{0.240900pt}
+\begin{picture}(1500,900)(0,0)
+%\tenrm
+\thicklines \path(199,179)(219,179)
+\thicklines \path(695,179)(675,179)
+\put(177,179){\makebox(0,0)[r]{2}}
+\thicklines \path(199,262)(219,262)
+\thicklines \path(695,262)(675,262)
+\put(177,262){\makebox(0,0)[r]{2.5}}
+\thicklines \path(199,344)(219,344)
+\thicklines \path(695,344)(675,344)
+\put(177,344){\makebox(0,0)[r]{3}}
+\thicklines \path(199,427)(219,427)
+\thicklines \path(695,427)(675,427)
+\put(177,427){\makebox(0,0)[r]{3.5}}
+\thicklines \path(199,510)(219,510)
+\thicklines \path(695,510)(675,510)
+\put(177,510){\makebox(0,0)[r]{4}}
+\thicklines \path(199,592)(219,592)
+\thicklines \path(695,592)(675,592)
+\put(177,592){\makebox(0,0)[r]{4.5}}
+\thicklines \path(199,675)(219,675)
+\thicklines \path(695,675)(675,675)
+\put(177,675){\makebox(0,0)[r]{5}}
+\thicklines \path(294,179)(294,199)
+\thicklines \path(294,675)(294,655)
+\put(294,134){\makebox(0,0){0.2}}
+\thicklines \path(394,179)(394,199)
+\thicklines \path(394,675)(394,655)
+\put(394,134){\makebox(0,0){0.4}}
+\thicklines \path(495,179)(495,199)
+\thicklines \path(495,675)(495,655)
+\put(495,134){\makebox(0,0){0.6}}
+\thicklines \path(595,179)(595,199)
+\thicklines \path(595,675)(595,655)
+\put(595,134){\makebox(0,0){0.8}}
+\thicklines \path(695,179)(695,199)
+\thicklines \path(695,675)(695,655)
+\put(695,134){\makebox(0,0){1}}
+\thicklines \path(199,179)(695,179)(695,675)(199,675)(199,179)
+\put(45,427){\makebox(0,0)[l]{\shortstack{$\epsilon T/k_B$}}}
+\put(447,67){\makebox(0,0){$x_A$}}
+\put(199,179){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(207,262){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(214,344){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(219,410){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(244,510){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(282,592){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(307,609){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(582,609){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(607,592){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(645,510){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(670,410){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(675,344){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(682,262){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\put(690,179){\raisebox{-1.2pt}{\makebox(0,0){$\Diamond$}}}
+\end{picture}

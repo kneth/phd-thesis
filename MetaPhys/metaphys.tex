@@ -1,0 +1,233 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Metaphysics of simulations
+%% (C) Kenneth Geisshirt (kneth@chem.ruc.dk)
+%% Last modified: 8 January 1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Computational Science}
+\label{chap:CompSci}
+\pagenumbering{arabic}
+The present thesis is about computer simulations of
+statistical-mechanical systems. In this chapter we will take a closer
+look at the branch of science called \textit{computational
+science}. The chapter is not restricted to chemistry, and we have
+tried to write it in general terms but most of the examples will come
+from chemistry since the author is most familiar with chemistry. 
+
+
+\section{The new branch}
+\label{sect:NewBranch}
+Science - here understood as the physical sciences including physics
+and chemistry - has traditionally been divided into two branches or
+legs: theory and experiment. The experiment is nowadays seen as the
+notion that makes \eg chemistry, scientific. The experiment was
+introduced in science during the scientific revolution 3--4 centuries
+ago \cite{Westfall71}. Before then, science was mainly theoretical.
+
+The introduction of the computer into science has started a new
+revolution: a new branch of science is emerging, namely computational
+science. No precise definition of computational science exists,
+and the question can easily trigger a passionate debate among
+computational scientists - recently Hocquet asked\footnote{The debate
+  was running on the Internet through the ``Computational Chemistry
+  List'' (a mailing list), and an archive of the contributions can be
+  found at
+\texttt{http://ccl.osc.edu/ccl/archived{\_}messages.html }.}
+whether computational chemistry was restricted to molecular modelling,
+and his question started a long and interesting debate. According to
+our personal taste, we will adopt the definition by Golub \etal
+\cite{Golub92}: 
+
+\begin{quotation}
+\noindent Computational science is the set of tools, techniques, and
+  theories used to solve problems in science and engineering by a
+  computer. 
+\end{quotation}
+
+One of the first clear examples of computational investigation of
+physical properties is the study by Metropolis \etal
+\cite{Metropolis53}. In 1953 Metropolis \etal published a paper which
+introduced the Monte Carlo (MC) method. Shortly thereafter Alder \etal
+\cite{Alder57} introduced the Molecular Dynamics (MD) method. Adler
+\etal and Metropolis \etal were interested in the equation of state and
+phase transitions of simple liquids.
+
+\section{Theoretical or experimental?}
+\label{sect:TheoryOrExp}
+Science has traditionally been divided into two branches; theoretical
+and experimental. One can put forward the question, whether
+computational science is experimental or theoretical.
+
+We can easily answer the question: Computational science is neither
+experimental nor theoretical, but it does have notion in common with both.
+Computational science requires software 
+which is produced by programming. Programming is the process where
+ideas are formalised and written as a computer
+program. The notation used in programming is not formul{\oe} as in
+the theoretical approach but a programming language. Still, the
+notation is unambiguous as the mathematical notation, and this aspect
+of computational science is close to theoretical science. However, the
+computer can be regarded as an instrument, and then computational science
+suddenly has an experimental orientation \cite{OGM93}. Rapaport
+\cite{Rapaport95} has pro-arguments for the term ``numerical
+experiment''. Moreover, Rapaport argues, the distinction between
+computational methods and theoretical approaches is the cost; theory
+can be done with a piece of paper and a pencil, while computations
+require an investment in hardware.
+
+Traditionally, science has tried to construct
+theories that explain experiments to some extend or to conduct
+experiments that can verify a given theory. Figure
+\ref{fig:ExpModelTheory} shows the role of computational
+science. Theories are used to obtain approximations and general
+explanations of the experimental data. The computer simulations are
+instead used to investigate the model of the experiment in a more
+naive fashion than it is analytically possible.
+
+
+\begin{figure}
+  \begin{center}
+    \input{MetaPhys/grene.tex}
+  \end{center}
+  \caption[The role of computational science]{The relationship between
+  experiment, computer simulation and theory in modern physical
+  science. From \protect\cite{Geisshirt96b} and inspired by
+  \protect\cite{Allen87}.\label{fig:ExpModelTheory}}
+\end{figure}
+
+Let us - through an example - explain the ideas formulated
+above. Consider a simple liquid; it could be methane,
+$\mathrm{CH}_4$. We can, by experimental means, measure a given physical
+quantity; for instance the pressure at a given temperature and
+density. Methane is a simple liquid, and we will expect that it
+behaves as a classical-mechanical system \ie we will expect that the
+Hamiltonian equations of motion are applicable, and the interaction
+potential is the Lennard-Jones potential, see \eg Hansen \etal
+\cite{Hansen86}. It is possible from the interaction potential to
+evaluate the next few virial coefficients, and use these to obtain
+approximative values of the pressure as function of temperature and
+density. This is the theoretical or analytical approach. The
+brute-force method (or the naive method) is to numerically solve
+the equations of motion and calculate the pressure at a given density
+and temperature. This approach is exact in the sense that the only two
+approximations used are the application of classical mechanics and the
+numerical scheme/the computer program. All three approaches
+provide us with a set of data, which can now be compared and the model
+and the approximation in the theoretical derivation can be verified or
+falsified by comparing with the experimental data.
+
+
+\section{Validation}
+\label{sect:ModelValid}
+In science in general, the concept of validation covers the process of
+comparing the real-world facts and the predictions of the model, and
+then conclude whether the model is reliable or not. The use of
+computers to make the predictions, makes the validation process a bit
+more complicated.
+
+The complication of the validation process comes from the nature of
+the solution strategy: the predictions by the model are obtained by
+the use of a computer program. Typically, the computer program is
+written by the scientist himself. The first step in making reliable
+predictions is to justify that the computer program works correctly. 
+
+The verification of computer programs is not a trivial matter, and
+scientific programs might be even harder to verify. A typical
+verification of a computer program is to test the program. The test
+procedure is based on the idea that the program maps an input space
+on an output space. For example, a user working with a database
+at the library, the queries he types (the name of the author,
+\textit{etc}.) is the input space, and the records that the database program
+prints are the output. Most computer programs are deterministic \ie the
+mapping between the input and the output is a deterministic mapping (the
+mapping is mathematically speaking surjective and not invertible). The
+testing procedure used is the following: the programmer constructs by
+hand the output associated with a given input (this is called a test
+example). If the program returns the same output as the programmer
+deduced, the program is less likely to contain errors. The art of
+testing is then to construct test examples which are as orthogonal as
+possible, so the testing period will be as short as possible. This test
+procedure is discussed at length by Myers \cite{Myers84}.
+
+Now the construction of test examples is not as simple as outlined
+above. The reason why we write computer programs for scientific
+purposes is that we cannot solve the problem by hand \ie map the
+input space onto the output space. Three procedures
+can then be persuited: 
+
+\begin{itemize}
+  \item The reproduction of data obtained from other sources. In
+    some fields, a set of test examples might exist.
+  \item Often in some limiting cases, the solution can be found
+    analytically. This can be used to construct test
+    examples. For example, we can easily solve 2 linear equations with
+    2 unknown variables, and this can be used to test a general linear
+    equation solver.
+  \item One can monitor some quantity which value is known from some
+    exact analysis of the problem.
+\end{itemize}
+
+The last point is useful when it comes to
+statistical-mechanical simulations. As an example consider a system of
+$N$ particles in a microcanonical ensemble. We know that the total
+energy $E_{\smbox{tot}}$, is a conserved quantity \ie
+$E_{\smbox{tot}}$ must be constant. One can 
+print $E_{\smbox{tot}}$ as function of time, and if it is constant
+(within the precision of the computer) we have increased the degree of
+reliability of the program.
+
+
+\section{Simulational or computational scientists}
+So far we have discussed computational science, but one sees a
+division of the scientific community in the way, its members use
+computing equipment. Scientists doing simulations or calculations can be
+divided into two types. This classification is discussed by Mouritsen
+\cite{OGM93}. The types are: 
+
+\begin{itemize}
+  \item The type that happily spend hours (or even weeks or months) on
+    writing computer programs. Designing and implementing the computer
+    program is more satisfactory for them than the actual scientific
+    problem. We will call them \textit{computational scientists}.
+  \item The second type is the scientist who is a user of a simulation
+    program. He has never written a simulation program but the
+    computing system (hardware and software) is his major scientific
+    equipment. This type is called the \textit{simulational scientist}.
+\end{itemize}
+
+The classification above is of course extreme, and most scientists who
+use computers, are somewhere in between. The two types have advantages
+and disadvantages. The computational scientist knows everything about
+the computational method - its strong and weak points. But he works
+slowly, in the sense that he does not solve many problems but
+develops new computational methods. The simulational scientist, on
+the other hand, solves many scientific problems, but has to rely on
+computer programs written by others. He tends to regard the computer
+(hardware and software) as a black box. Neither of two types are the
+best, but it seems to us that the population of simulational
+scientists is growing faster than the population of computational
+scientists. The desktop computers have become fast enough to solve
+large problems, and many problems can be solved by using commercial
+software packages \eg quantum chemical problems.
+
+Even though commercial software packages can solve many of the
+(standard) problems in science, we strongly believe that the best
+scientific programs are written by computational scientists. A person
+trained in science will, in general, be better to solve computational
+problems related to science than the average programmer.
+
+\section{Concluding remarks}
+\label{sect:MetaConclusion}
+The application of computers to scientific problems creates new
+problems. But it also introduces new solution methods. Problems which
+were regarded as impossible to solve, can now be examined numerically.
+We regard this development as very exciting.
+
+Moreover, computer simulations may also save us from many problems, and
+be able to create short-cuts. In the pharmaceutical industry, computer
+simulation techniques can be used to ``test'' compounds; it is often
+referred to as \textit{rational drug design}. The excellent book by
+Grant \etal \cite{Grant95} shows many of the modern application of
+computer in chemistry, and we strongly believe that computers will help
+both life sciences and physical sciences in solving complex problems
+in the future.

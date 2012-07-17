@@ -1,0 +1,9 @@
+set term latex
+set output 'phenosim.tex'
+
+set yrange [1.95:2.30]
+
+set xlabel "time"
+set ylabel "$[A]$"
+
+plot 'phenosim.data' u 1:2 t '' w l

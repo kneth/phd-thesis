@@ -1,0 +1,310 @@
+%% (C) Copyright 1996 by Kenneth Geisshirt
+%% Last modified: 15 Mar 1996
+%% Modified for Ph.D. thesis: 14 August 1997
+\chapter{Oscillating Chemical Reactions Simulated by Molecular Dynamics}
+\label{Paper:csp96}
+
+This paper appeared as a contribution to the workshop ``Computer
+Simulation Studies in Condensed-Matter Physics 9'' held in Athes,
+Georgia, March 1996. It has been published by Springer-Verlag in
+``Proceedings in Physics'' volume 82, pp.\ 144-149 in 1997. The
+authors were Kenneth Geisshirt, Eigil Pr{\ae}gaard, and S{\o}ren
+Toxv{\ae}rd.
+
+
+
+\begin{center}
+Abstract
+
+We outline how chemical reactions can be simulated by Molecular Dynamics,
+and we apply our technique to an oscillating chemical reaction scheme;
+a modified Volterra-Lotka scheme. We observe deviations from the
+phenomelogical equations in the phase separating temperature region.
+\end{center}
+
+\section{Introduction}
+The phenomenon of oscillating chemical reactions is fairly new \ie it
+has been known for the last three or four decades. The development
+of the theory for oscillating chemical reactions is strongly connected to 
+the theory of nonlinear dynamical systems and nonequilibrium 
+thermodynamics. Until now oscillating chemical
+reactions have experimentally been investigated macroscopicly and
+the theory used for describing the reactions is
+phenomelogical. Experimentally stu\-died oscillating reactions are
+either external driven systems or systems allowed to relax to
+equilibrium. 
+
+On the other hand oscillating systems have been investigated
+numrically as long as oscillating reactions have been known by means
+of coupled differential equations in the consentrations. It is however
+possible by today's computers to simulate chemical reactions in
+continious space and on a molecular level by Monte-Carlo (MC) and
+Molecular Dynamics (MD) simulations. It implies that it is possible to
+investigate realistic systems where also other nonlinear dynamics,
+like a phase seperation might influence the chemical reaction. It was
+recently shown that chemical reactions have a large effect on phase  
+separation; see \eg \cite{glotzer} for a Monte-Carlo study of simple 
+first-order reactions $A \rightleftarrows B$ and Molecular Dynamics study of
+first- and second-order reactions \cite{tox2}. 
+
+
+\section{Chemical Kinetics and Molecular Dynamics}
+Chemical reactions, on a microscopic level, are usually formulated as
+coupled  elementary reactions. We will here only consider coupled
+bimolecular reactions \ie a reactions where there are two reactants
+in each reactions. 
+
+The usual chemical viewpoint is the transition state theory. The basic idea
+is that the two reactants collide and form an activated complex ($C^{\ddag}$),
+which can either break into the reactants again or into the products.
+The quantum mechanical details in this reversible dynamics are,
+however, believed to be of no importance for the overall kinetics of
+oscillating reactions. The main feature is that the exchanges of
+covalent bonds occur with a certain probability when the reactants
+are separated at a short molecular distance.  
+The reaction rate is typically given by an Arrhenius expression where
+the rate depends exponentially on the activation energy in units of
+the kinetic energy (the temperature). Experimentally, reactions
+with small activation energy are difficult to follow because they are
+fast. In Molecular Dynamics, however, we are in the opposite
+situation. With today's computers we are able to simulate of the order
+$10^{5}$ (simple) molecules in of the order ${10^{6}}$ 
+time steps, which correspond to reaction times of only nanoseconds. 
+For this reason the transition energy is taken to be of the order
+$T$ which automatically implies that the reaction takes place on a
+time scale equal to the mean collision time. Futhermore, a chemical
+reaction appears in an open system, \ie without 
+a conserved energy and fixed number of reactant. On the other hand a
+traditional MD system consists of a fixed number of particles 
+and with a well-defined Hamiltonian, which makes it to a non-trivial
+task to reformulate the dynamics in open systems with chemical
+reactions. The actual implementation and its impact on 
+the dynamics is described in in more details in Ref.\ \cite{tox2}.
+In summary the reaction dynamics is implemented into the MD 
+by spontaneously  and with a certain probability, to relabel the
+colliding particles. Futhermore, in order not to introduce large force
+gradients into the system by this reaction dynamics we only consider 
+reactions between particles with almost the same excluded volumes,
+\ie the chemical individualities of the reactants are given by their
+long range forces and not by their short range forces.  
+This feature is certainly unrealistic from a chemical view point; but
+it is believed to be of no importance for the qualitative behavior of
+the chemical reaction dynamics as will be demonstrated.
+
+
+\section{A particular example: MD simulations of the modified
+Volterra-Lotka reaction}
+We have chosen a particular oscillating system as our system. It consists of
+three species and three reactions. The reactions are:
+
+\begin{eqnarray}
+  A + X &\overset{k_1}{\rightarrow}& 2X \label{Reac1} \\
+  X + Y &\overset{k_2}{\rightarrow}& 2Y \label{Reac2} \\
+  Y + A &\overset{k_3}{\rightarrow}& 2A \label{Reac3}
+\end{eqnarray}
+
+To minimise the number of parameters in our model, we have chosen to set $k_3$
+to the same value as $k_1$.
+
+This reaction scheme is a simple modification of the Volterra-Lotka
+equation for a homogeneous (in space) oscillating reaction
+\cite{lotka1} \cite{lotka2}. In 
+a traditional chemical reaction experiment the system is fed by a
+reactant $A$ which through a consecutive set of unimolecular reactions
+is transformed into the product $B$. In our case and for
+an open MD system of particles in a volume with pe\-riodi\-cal boundaries
+it is, however, convenient to equal reactant and product and thus to
+recover $A$ through reaction \ref{Reac3}. It is the
+only modification of the traditional reaction scheme for the
+oscillating reaction and the flow through the system is obtained, as
+usual by only forward elementary reactions without reverse
+reactions. This corresponds to that the reactant has a significant
+higher (free) energy than the product.
+
+From these three reactions, one can easily derive three phenomelogical 
+equations describing the concentrations of the three species. The equations
+are:
+
+\begin{eqnarray*}
+  \frac{d[A]}{dt} &=& -k_1[A][X] + k_1[A][Y] \\
+  \frac{d[X]}{dt} &=& k_1[A][X] - k_2[X][Y] \\
+  \frac{d[Y]}{dt} &=& k_2[X][Y] - k_1[A][Y]
+\end{eqnarray*}
+where $[\cdot]$ means the concentration. The phenomelogical equations are
+only valid in the complete homogeneous case, which experimentally is 
+realised by stirring the contents of the chemical reactor.
+
+We have three coupled ordinary differential equations which are
+impossible to find an analytical solution to. In general, we have
+equations of the type:
+
+\[
+  \frac{d\vec{x}}{dt} = \vec{f}(\vec{x})
+\]
+
+We can first find a stationary solution to the problem above \ie
+find an $\vec{x}_0$ which satisfies $\vec{f}(\vec{x}_0) =
+\vec{0}$. Then we can linearise the differential equation at this
+stationary point and obtain
+
+\[
+  \frac{d\delta\vec{x}}{dt} = \mathbf{J}(\vec{x}_0) \delta\vec{x}
+\]
+where $\mathbf{J}$ is the Jacobian matrix and $\delta\vec{x}$ is the
+deviation from the stationary point, i.e.\ $\delta\vec{x} =
+\vec{x}-\vec{x}_0$. The linearised system is a linear differential
+equation. The solution of the linear differential equation is 
+
+\[
+  \delta\vec{x} = \sum_{i} \vec{e}_i e^{\omega_i t}
+\]
+where $\omega_i$ is the $i$th eigenvalue and $\vec{e}_i$ is basically
+the $i$th eigenvector which is normalised appropriately.
+
+The modified Volterra-Lotka scheme has a stationary solution, which is
+
+\begin{eqnarray*}
+  {[A]}_0 &=& C \left( 1-\frac{2k_1}{2k_1+k_2} \right) \\
+  {[X]}_0 &=& {[Y]}_0 = \frac{C k_1}{2k_1 + k_2}
+\end{eqnarray*}
+where $C$ is the total concentration \ie $C = [A]+[X]+[Y]$ which is a 
+constant.
+
+We can now linearise the system and calculate the eigenvalues of the Jacobian 
+matrix at the stationary point. We get
+
+\[
+  \lambda_1 = \overline{\lambda_2} 
+  = \frac{C k_1 \sqrt{k_2}}{\sqrt{2k_1 + k_2}}\imath
+\]
+which shows us that the system will have sustained oscillations - at least
+close to the steady-state solution.
+
+
+\section{Simulational details}
+The chemical equations for the Volterra-Lotka reaction expresses a
+\textit{homogeneous} change in the concentration space of the
+reactants, which for certain values of the reaction rates,
+oscillate. In a real experiment it means that large concentrations of
+a certain component is built up for a while and then disappears
+through a chemical reaction. If the three components are miscible for
+all concentrations one would expect that the dynamics might be well
+described by the traditional homogeneous differential equations,
+whereas a new situation appears if one of the concentrations exceeds
+the critical value of solubility and a competing phase separation
+takes place in the oscillating system.  For this
+reason we will expect a non-trivial difference between a set of
+homogeneous chemical reactions and a corresponding MD simulation.
+This is due to the fact that we in an MD system can create a phase
+separation by a chemical reaction, simply by ensuring that the product
+has an intermolecular potential which favors phase separation. This is
+ensured in the  very same manner as for the chemical reaction by
+varying the long range attractions between the molecules. For details
+see \eg \cite{tox3}.
+
+The system is - as already mentioned - a three-component system. The 
+interaction of particles of the same type is a Lennard-Jones potential
+which is cut at $r = 2.5$. The interaction between particles of different
+types is also a Lennard-Jones potential, but it is cut at $r=1.0$ 
+meaning that it is replusive only. The density of the system is
+$0.6$. At low enough temperature a system with such interactions will
+phase separate. We use the same reaction parameters 
+throughout all our simulations. The collision diameter is set to 1.0 
+(in Lennard-Jones units). 
+The probability of reaction is set to 
+$1.0\cdot 10^{-3}$ for reactions \ref{Reac1} and \ref{Reac3} while 
+for reaction \ref{Reac2} it is set to $1.1\cdot 10^{-3}$.
+
+All our simulations are performed in the $NVT$-ensemble using a 
+Nos\'{e}-Hoover thermostat to control the temperature and a leap-frog
+algorithm to integrate the equations of motion \cite{toxvaerd}. The
+chosen time step is $h = 5\cdot 10^{-4}$. Furthermore, all simulations are
+done in two spatial dimensions.
+
+\section{Results and open questions}                           
+We have performed a number of simulations at different temperatures with 
+either 1024 or 8192 particles. Rate
+constant for a reaction usually follow Arrhenius' law \ie
+$k(T) = A\cdot e^{-E_a/RT}$, 
+where $E_a$ is the activation energy, $A$ is a preexponetial factor, and $R$
+is the gas constant.
+
+During our simulations we have stored instantaneous values of the 
+concentrations and the number of times the three reactions has
+occured. Figure \ref{FigConc} shows the concentration of $A$ versus
+time for a typical simulation.
+The number of
+times a reaction has occured (denoted $N_R$) is proprotional to the
+velocity of that reaction 
+and we therefore have a simple relationship for the rate constant, namely
+$k = \frac{N_R}{[J][J^{\prime}]}$,
+where $J$ and $J^{\prime}$ denote the two reactants in the reaction.
+
+\begin{figure}
+  \input{Papers/csp96/osconc.tex}
+  \caption{The concentration of \protect$A\protect$ versus time. The
+simulation shown consists of 8192 particles and the temperature is
+\protect$1.4\protect$. The time is measured in unit of time
+steps.\label{FigConc}} 
+\end{figure}
+
+
+Figure \ref{ArrhPlot} shows the rate constant for reaction \ref{Reac1}
+versus the inverse tempera\-ture. Similar plots can be made for the two
+other reactions. The estimated error bars are very small. Our estimates
+are that they are at 4th or 5th significant digit \cite{Blocking}.
+
+\begin{figure}[t]
+  \input{Papers/csp96/arrh.tex}
+  \caption{Arrhenius plot for the rate constant for reaction \ref{Reac1}.
+  The lower curve is for 1024 particles and the upper one is for 8192
+  particles. Note that the rate constants are not normalised according 
+  to the number of particles and therefore the rate constants for the
+  8192 particle simulations are 8 times larger. The dotted lines are
+  the best fitted lines to the data in that particular temperature
+  region.\label{ArrhPlot}}
+\end{figure}
+
+We notice there is a crossover at $T \approx 3$. The crossover seems not 
+just to be a finite-size effect since we see it at simulations with 1024 and 
+8192 particles.
+
+We believe that this effect comes from the fact that the system goes from 
+being phase separated to a homogeneous phase when we increase the 
+temperature. In the homogeneous phase the
+three reactions can occur at all places in the simulation box while below
+the phase separating temperature, the reactions will mainly occur at the 
+boundaries between clusters of, say, $X$ and $Y$. The critical
+temperature for a similar system of a binary mixture is $T_{c} \approx
+4.7$ \cite{tox3}. In the critical region the phase separation dynamics
+is extremely slow; but well below this region two processes will
+compete: diffusion (to the interfacial reaction zone) and
+reaction. The figure shows that the activation energy in the low
+temperature region is not the activation energy for the reaction but
+the activation energy for combined process of diffusion and reaction.
+
+\subsection*{Acknowledgements}
+The authors wish to thank the National Science Foundation (in Denmark) for
+computing time on the IBM SP2 at the National Computer Centre (Uni-C). We 
+also wish to thank M.\ Laradji for his many advices.
+
+\begin{thebibliography}{1}
+\bibitem{toxvaerd} Toxvaerd, S., 1991, Mol.\ Phys.\ \textbf{72}(1), 159.
+\bibitem{Blocking} Flyvbjerg, H.\ and Petersen, H.G., 1989, J.\ Chem.\ Phys.\
+                   \textbf{91}(1), 461.
+\bibitem{Laidler} Chemical Kinetics, 3rd edition. K.J.\ Laidler. HarperCollins,
+                  1987.
+\bibitem{glotzer} Glotzer, S.C., Stauffer, D., and Jan, N., 1994, Phys.\ Rev.\ 
+                 Lett.\ \textbf{72}(26), 4109.
+\bibitem{tox2} Toxvaerd, S., 1996, \textit{to appear in} Phys.\ Rev.\
+               E \textbf{53}.
+\bibitem{lotka1} Lotka, A., 1910, J.\ Phys.\ Chem.\ \textbf{14}, 271.
+\bibitem{lotka2} Lotka, A., 1920, J.\ Am.\ Chem.\ Phys.\ \textbf{42},
+                 1593.
+\bibitem{tox3} Toxvaerd, S.\ and Velasco, E., 1995, Mol.\ Phys.\
+               \textbf{86}, 845.\\
+\end{thebibliography}
+
+
+
+

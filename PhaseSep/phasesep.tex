@@ -1,0 +1,482 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% (C) Kenneth Geisshirt (kneth@chem.ruc.dk)
+%% Last modified: 30 January 1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Phase Separation}
+\label{chap:PhaseSep}
+
+Simple liquids have been studied by computer simulations for more than
+forty years. The first pioneering studies by \eg Metropolis \etal
+\cite{Metropolis53} were concerned with
+the equation of state. But since the early 1960s the focus has been on
+phase transitions.
+
+In this chapter we will review some of the basic theories about phase
+transitions with emphasis on phase separation. We will begin the
+chapter by giving a few general references: Binder \cite{Binder} has
+reviewed the kinetics of phase separation very pedagogically.
+The best and most general textbook is the
+textbook by Goldenfeld \cite{Goldenfeld92}.
+
+
+\section{Phase transitions}
+\label{sect:PhaseTrans}
+Phase transitions are a well-known phenomenon in everyday life \eg the
+melting of an ice cube. The properties of phase transitions have been
+studied experimentally and theoretically for more than a century. An
+early observation was that at some phase transitions the heat capacity
+is singular at the transition temperature. This observation led
+Erhenfest to a classification of phase transitions. The classification
+proposed by Erhenfest is nowadays simplified, and we have only two
+types of phase transitions: 
+
+\begin{itemize}
+  \item the discontinuous transition where the heat capacity is singular
+  \item and the continuous transition where the heat capacity is
+  a continuous function of the temperature
+\end{itemize}
+
+The melting of ice is an example of a discontinuous phase transition
+while the structural changes in a lipid is typically a continuous
+transition. 
+
+Let us consider a pure substance \eg carbon dioxide,
+$\mathrm{CO}_2$. Given the pressure, the transition temperature from
+solid to liquid, is uniquely determined. The information \ie the
+set of transition pressures and temperature, is called the
+\textit{phase diagram}. For a pure substance like carbon dioxide a
+typical phase diagram is sketched in figure \ref{fig:PhaseDiagram}.
+
+\begin{figure}
+  \begin{center}
+    \input{PhaseSep/phasediag.tex}
+  \end{center}
+  \caption[Phase diagram of a pure substance]{A typical phase diagram
+  for a pure substance. The letters S, L, and G denote one phase
+  regions (solid, liquid, and gas).\label{fig:PhaseDiagram}} 
+\end{figure}
+
+The lines in a phase diagram is where the phase transition
+occurs. These lines are called the coexistence lines because two phases
+exist \ie they are in equilibrium. 
+
+A coexistence line can be calculated by using the Clapeyron equation \ie 
+
+\begin{equation}
+  \diff{P}{T} =
+  \frac{\Delta_{\smbox{trans}}S_m}{\Delta_{\smbox{trans}}V_m}
+\end{equation}
+where $P$ is the transition pressure, $T$ the temperature,
+$\Delta_{\smbox{trans}}S_m$ is the change in the molar entropy, and
+$\Delta_{\smbox{trans}}V_m$ is the change in the molar volume. 
+
+The phase diagram sketched in figure \ref{fig:PhaseDiagram} is for a
+pure substance only. If we turn to two-component mixtures, we need one
+extra variable in order to describe the phase transitions
+uniquely. Often the mole fraction of one of the species is used, and
+the phase diagram is three-dimensional. 
+
+For a pure substance there exists one point in the phase diagram where
+the three phases (solid, liquid, gas) coexist. We call this point
+the \textit{triple point}. It is located where the three coexistence
+lines meet. 
+
+
+\section{Simple liquids}
+\label{sect:SimpleLiq}
+One-component simple liquids have been studied experimentally,
+computationally and theoretically. We will concentrate on theoretical
+and computational results on one simple liquid: the Lennard-Jones liquid.
+
+The Lennard-Jones (LJ) liquid can be regarded as a family of liquids \ie
+many simple liquids can be approximated well using the Lennard-Jones
+potential. The LJ potential is a short-range potential which includes
+two parameters:
+
+\begin{equation}
+  u(r) = 4\epsilon \left[\left(\frac{\sigma}{r}\right)^{12} -
+    \left(\frac{\sigma}{r}\right)^6 \right]
+\end{equation}
+
+The parameter $\epsilon$ is the fundamental energy unit while the
+parameter $\sigma$ is the fundamental length unit. Table
+\ref{tab:LJparams} lists values for the parameters for a number of
+simple liquids. 
+
+\begin{table}
+  \begin{center}
+  \begin{tabular}{lrr}
+    \hline
+    Substance       & $\sigma$ (nm) & $\epsilon/k_B$ (K) \\ \hline
+    $\mathrm{He}$   & 0.2556        & 10.2               \\
+    $\mathrm{Ar}$   & 3.405         & 119.8              \\
+    $\mathrm{H}_2$  & 2.959         & 36.7               \\
+    $\mathrm{CH}_4$ & 3.817         & 148.2              \\
+    \hline
+  \end{tabular}
+  \end{center}
+  \caption[Lennard-Jones parameters]{The Lennard-Jones parameters for a
+    number of substances. Data taken from Hansen \etal
+    \cite{Hansen86}.\label{tab:LJparams}} 
+\end{table}
+
+Hansen \etal \cite{Hansen69} have performed computer simulations of
+a three-dimensional Lennard-Jones system, and they have found that the
+triple point is $\rho \approx 0.85 \sigma^3$ and $T \approx 0.68
+\epsilon/k_B$. Kofke \cite{Kofke93} and Panagiotopoulos \cite{Panagio87}
+have numerically studied the liquid-gas transition, and
+this part of the phase diagram is shown in figure \ref{fig:LJphase}.
+
+\begin{figure}
+  \begin{center}
+    \input{PhaseSep/pureLJ.tex}
+  \end{center}
+  \caption[Phase diagram for three-dimensional LJ liquid]{The phase
+   diagram of the pure three-dimensional Lennard-Jones system (temperature
+   versus pressure; scaled so $\epsilon = 1$ and $\sigma = 1$). The gas phase
+   is above the curve while the liquid phase exists below the curve. From
+   \cite{Kofke93}.\label{fig:LJphase}} 
+\end{figure}
+
+
+\section{The scaling hypothesis}
+\label{sect:scale}
+In this section we will briefly discuss scaling in the context of phase
+separation, for a more detailed description see Bray \cite{Bray94}. The
+physics behind the scaling hypothesis is that only one variable is
+relevant \cite{Bray94, Goldenfeld92}.
+
+If we consider a fluid close to the critical point, we find that the
+isothermal compressibility $\kappa_T$ behave as
+
+\begin{equation}
+  \kappa_T = - \frac{1}{V} \left(\pdiff{V}{p}\right)_T
+     \sim |T - T_c|^{-\gamma}
+\end{equation}
+were $T_c$ is the critical temperature. Moreover, the a similar
+behaviour is found for the heat capacity, namely
+
+\begin{equation}
+  C_V \sim |T - T_c|^{-\alpha}
+\end{equation}
+
+The scaling described above is the so called static scaling since there
+is no temporal dependency. A large number of systems has the same value
+for the exponents even though the system might be of very different
+nature. This fact has lead the physicists to associate each value with
+a universality class.
+
+
+\section{Phase separation}
+\label{sect:PhaseSep}
+The basic phenomenology of phase separation is simple \cite{Goldenfeld92}.
+Imagine that we
+have a mixture of two substances, $A$ and $B$. At high temperature the
+two substances will be miscible, and at low temperature they will be
+immiscible. The transition from miscible to immiscible occurs at a
+well-defined temperature, $T_C$.
+
+Consider a mixture of two simple liquids; figure \ref{fig:SpinodalDiag}
+outlines the general phase diagram. Outside the solid line the two
+liquids are miscible, and the line is the coexistence line. Between the
+solid and the dashed line, the system will phase separate through a
+nucleation process, and inside the dashed line we will see a spinodal
+decomposition. 
+
+\begin{figure}
+  \begin{center}
+    \input{PhaseSep/spinodal.eepic}
+  \end{center}
+  \caption[Phase diagram of a mixture]{A phase diagram for a mixture of
+  two simple liquids. The solid line is the coexistence line while the
+  dashed line is the the spinodal line.\label{fig:SpinodalDiag}}
+\end{figure}
+
+\subsection{Nucleation}
+As already mentioned, phase separation through a
+nucleation occurs between the solid lines and the dashed lines in
+figure \ref{fig:SpinodalDiag}. Thermal fluctuations form small droplets
+in a homogeneous phase. The free energy change $\Delta F$, of forming a
+droplet of radius $R$ is
+
+\begin{equation}
+  \Delta F =
+    \begin{cases}
+       4\pi \sigma R^2 - \frac{4}{3}\pi \epsilon R^3 &\text{in three
+                    dimensions} \\
+       2\pi \sigma R - \pi \epsilon R^2 &\text{in two dimensions}
+    \end{cases}
+\end{equation}
+where $\epsilon$ is the free energy of the bulk and $\sigma$ is the
+surface free energy. The critical size, $R_c$, of a droplet is the
+maximum in the free energy. When the droplet is larger than the
+critical droplet, the droplet will grow. We can find the critical
+radius by differentiating the free energy and find the root. We find:
+
+\begin{equation}
+  R_c =
+  \begin{cases}
+    \frac{2\sigma}{\epsilon} &\text{three dimensions} \\
+    \frac{\sigma}{\epsilon}  &\text{two dimensions}
+  \end{cases}
+\end{equation}
+
+
+\subsection{Spinodal decomposition}
+\label{sect:CahnHilliard}
+Through a spinodal decomposition the system will phase separate by
+forming a labyrinth structure which coarsen. The kinetics of the spinodal
+decomposition was first investigated by Cahn \etal \cite{Cahn58}, and
+the theory now goes under the name \textit{Cahn-Hilliard theory}. 
+
+Let us define an order parameter, $\psi$, as $\psi(\vec{r}, t) \equiv
+c(\vec{r}, t) - c_0$ where $c(\vec{r}, t)$ is the local concentration,
+and $c_0$ is the equilibrium concentration. Moreover, let $f$ denotes
+the free energy per molecule. The free total energy $F$ in a volume $V$ is
+
+\begin{equation}
+\label{eq:CHintegral}
+  F = \int_V f \mathrm{d}V
+\end{equation}
+
+In order to evaluate this integral, we can Taylor expand the free
+energy at $c_0$ ($\psi = 0$); the free energy of a spatially homogeneous system is
+$f_0$. Moreover, $f$ does also depend on $\nabla c$, $\nabla^2 c$ and higher
+order derivatives. The Taylor expansion to first order in $c$, $\nabla c$ and
+$\nabla^2 c$ is
+
+\begin{equation}
+\label{eq:CHTaylor}
+  f = f_0 + \sum_i L_i \pdiff{\psi}{x_i}
+          + \sum_{ij} \kappa_{ij}^{(1)}
+               \frac{\partial^2 \psi}{\partial x_i \partial x_j}
+          + \half \sum_{ij} \kappa_{ij}^{(2)} \pdiff{\psi}{x_i}\pdiff{\psi}{x_j}
+          + \cdots
+\end{equation}
+where $x_i$ and $x_j$ represent the spatial variables and
+
+\begin{subequations}
+  \begin{eqnarray}
+    L_i &=& \left. \pdiff{f}{(\partial \psi/\partial x_i)}\right|_{\psi=0} \\
+    \kappa_{ij}^{(1)} &=& \left.
+           \pdiff{f}{(\partial^2 \psi/\partial x_i\partial x_j)}
+              \right|_{\psi=0} \\
+    \kappa_{ij}^{(2)} &=& \left.
+           \frac{\partial^2 f}{\partial (\partial \psi/\partial x_i)
+                   (\partial \psi/\partial x_j)} \right|_{\psi=0}
+  \end{eqnarray}
+\end{subequations}
+
+Since we will assume that the mixture is isotropic, we will have
+
+\begin{subequations}
+  \begin{eqnarray}
+    L_i &=& 0 \\
+    \kappa_{ij}^{(1)} &=&
+    \begin{cases}
+       \kappa_1 = \pdiff{f}{\nabla^2 \psi} & \text{for $i=j$} \\
+       0                                & \text{otherwise}
+    \end{cases} \\
+    \kappa_{ij}^{(2)} &=&
+    \begin{cases}
+       \kappa_2 = \frac{\partial^2 f}{\partial(|\nabla\psi|)^2} & \text{for $i=j$} \\
+       0 & \text{otherwise}
+    \end{cases}
+  \end{eqnarray}
+\end{subequations}
+
+This reduces the expansion of $f$ to
+
+\begin{equation}
+  f = f_0 + \kappa_1 \nabla^2 \psi + \kappa_2 (\nabla \psi)^2
+\end{equation}
+
+By applying the divergence theorem to equation \eqref{eq:CHintegral}
+and inserting equation \eqref{eq:CHTaylor}, we obtain the Cahn-Hilliard
+free energy functional
+
+\begin{equation}
+\label{eq:CHfreeEnergy}
+  F[\psi(\vec{r})] = \int \half (\nabla\psi)^2 + k f_0[\psi(\vec{r})]
+                     \mathrm{d}\vec{r}
+\end{equation}
+where
+
+\[
+  k = - \left. \frac{\partial^2 f}{\partial \psi\partial\nabla^2 \psi}
+             \right|_{\psi=0}
+           + \left. \frac{\partial^2 f}{(\partial|\nabla\psi|)^2}
+             \right|_{\psi=0}
+\]
+
+The free energy $f$ has the following properties. It has only one
+minimum above the critical temperature, and it is located at $\psi =
+0$ \ie above the critical temperature, the system can only be in a
+homogeneous state. Below the critical temperature, the free energy has
+two minima which are not located at $\psi = 0$. The free energy $f_0$ is
+often assumed to be a Landau free energy near the critical temperature
+\ie a free energy in the form
+
+\[
+  f_0[\psi] = f_0(T) + a(T)\psi^2 + b(T)\psi^4 + \cdots
+\]
+
+Even though the system phase separate, the mass is conserved, which is
+the same as
+
+\begin{equation}
+\label{eq:MassConserve}
+  \pdiff{\psi}{t} + \nabla\cdot \vec{j} = 0
+\end{equation}
+where $\vec{j}$ is the flux defined as
+
+\begin{equation}
+\label{eq:Mobil}
+  \vec{j} = -M \nabla \frac{\delta F}{\delta \psi}
+\end{equation}
+
+The parameter $M$ is a measure of the mobility of the species (similar to
+diffusion), and $\delta F/\delta \psi$ is the functional derivative of
+$F$ with respect to $\psi$. Putting equations \eqref{eq:CHfreeEnergy},
+\eqref{eq:MassConserve} and \eqref{eq:Mobil} together we obtain the
+Cahn-Hilliard equation \ie
+
+\begin{equation}
+\label{eq:CahnHilliard}
+  \pdiff{\psi}{t} = M\nabla^2 \left(\frac{\delta f_0}{\delta\psi} -
+                    \nabla^2\psi\right)
+\end{equation}
+
+Initial conditions are the homogeneous state \ie a state where $\langle
+\psi \rangle = 0$. During the spinodal decomposition patterns are
+formed, and the final pattern is the equilibrium pattern \ie phases
+which are pure in one of the species.
+
+The Cahn-Hilliard equation cannot be solved analytically, but only
+numerically. In section \ref{sect:PhaseSepChem} we will discuss how the
+Cahn-Hilliard equation can be extended in order to include chemical
+reactions.
+
+
+\subsection{Dynamic scaling}
+Now consider the phase separation process, and let $R(t)$ denote the
+average domain size. As early as 1961, Lifshitz, Slyozov and Wagner
+were able to predict that the growth law is algebraic \cite{Bray94} \ie
+
+\begin{equation}
+\label{eq:LSW}
+  R(t) \sim t^{1/3}
+\end{equation}
+
+This growth law is called the diffusive regime, because the underlying
+physical model is diffusion-controlled reaction \ie two domains diffuse
+together and merge in order to form one large domain. At later times in
+the phase separation process the growth law can cross over to
+\cite{Bray94}
+
+\begin{equation}
+  R(t) \sim t^{2/3}
+\end{equation}
+
+The growth law predicted by Lifshitz \etal (equation \eqref{eq:LSW}) is
+not the only possible growth law. Equation \eqref{eq:LSW} is typically
+denoted the diffusive regime which the underlying model is a
+diffusion-controlled reaction. Other regimes include the viscous and
+the inertial regime.
+
+
+\subsection{The Lennard-Jones liquid}
+The mixture of Lennard-Jones liquids is a good system to study when we
+wish to understand the kinetics of phase separation.
+
+The phase diagram of a binary Lennard-Jones fluid has been published by
+Toxv{\ae}rd \etal \cite{Toxvaerd95a, Velasco93}. The phase diagram is
+shown in figure \ref{fig:PhaseLJmix}
+
+\begin{figure}
+%\centering
+    \mbox{\subfigure[2 dimensions]{\input{PhaseSep/ljmix2d.tex}} \quad
+          \subfigure[3 dimensions]{\input{PhaseSep/ljmix3d.tex}}}
+  \caption[Phase diagram of LJ mixture]{The phase diagram of a binary
+  mixture of two- and three-dimensional Lennard-Jones liquids. The data
+  point are found using MD simulation. The density is
+  $0.8\sigma^2$ and $0.8\sigma^3$ in the two cases.
+  From \cite{Toxvaerd95a}.\label{fig:PhaseLJmix}}
+\end{figure}
+
+Furthermore, Toxv{\ae}rd \etal show that the growth of the domains at late
+times is algebraic. They find the exponent to be $2/3$ when the
+particle fraction of each component is $\half$ while the exponent is
+$1/3$ when one of the components is dominating.
+
+Going to three-component systems, we see a major difference. Laradji
+\etal \cite{Laradji96} find that the growth exponent is $1/3$ for a
+system where the particle fraction of each component is equal.
+
+
+\section{Chemistry}
+\label{sect:PhaseSepChem}
+The phase separation discussed in the previous section was a physical
+process. During the 1990s a number of papers have been published on
+how chemical reactions might influence the phase separation process.
+
+The Cahn-Hilliard equation \eqref{eq:CahnHilliard} can be modified in
+order to include chemical reactions. Christensen \etal
+\cite{Christensen96} and Glozter \etal \cite{Glotzer95} have simple
+modifications. Consider the reaction $A \leftrightarrows B$. The
+forward and the reverse rate constants are denoted $k_f$ and $k_r$,
+respectively. The modified Cahn-Hilliard equation including these two
+reactions is
+
+\begin{equation}
+  \pdiff{\psi}{t} = M\nabla^2 \left(\frac{\delta f_0}{\delta\psi} -
+                    \nabla^2\psi\right) - k_f\psi + k_r (1-\psi)
+\end{equation}
+where $\psi$ is the local mole fraction of $A$. Both Christensen \etal
+and Glozter \etal set $k = k_f = k_r$. The modification of the
+Cahn-Hilliard equation is simple: we have added the velocity field coming
+from the chemical reactions.
+
+The average domain size $R$ scales with the time as
+
+\begin{equation}
+  R(t) \sim t^{\alpha}
+\end{equation}
+
+Without the competing chemical reactions, the exponent $\alpha$ is
+initially $1/3$ and $2/3$ at late times \cite{Farrell91, Wu95}. From a
+dimensional analysis Glotzer \etal \cite{Glotzer95} find that the
+average domain size scales as 
+
+\begin{equation}
+  R \sim \left( \frac{1}{k} \right)^{\alpha}
+\end{equation}
+
+At low reaction rates ($k \approx 0$) Christensen \etal and Glotzer
+\etal finds that the exponent $\alpha$ is approximately $1/3$. At
+larger reaction rates Christensen \etal find that the exponent is
+$1/4$.
+
+Monte Carlo simulations of an Ising model with competing reactions ($A
+\leftrightarrows B$) have been performed by Glotzer \etal
+\cite{Glotzer94}. They find that the exponent $\alpha = 0.22 \pm 0.02$
+which is consistent with the result by Christensen \etal. Toxv{\ae}rd,
+on the other hand, has performed Molecular Dynamics simulations of a
+Lennard-Jones mixture undergoing phase separation competing with
+chemical reactions. At low reaction rates the growth exponent is
+approximately $0.33$ while it is lower at higher reaction rate.
+
+Glozter \etal and Toxv{\ae}rd observe that the phase separation process
+is hindered by fast reactions. Toxv{\ae}rd argues that the reason is
+that the fast reactions destroy the hydrodynamic modes which are
+essential in the phase separation. A similar observation has been done
+by Verdasca \etal \cite{Verdasca95} and Christensen \etal
+\cite{Christensen96}. They see that chemical reactions might freeze
+the phase separation. This freezing is only observed at high reaction
+rates.
+
+Carati \etal \cite{Carati97} have recently published a paper on the
+chemical freezing. The theory presented by Carati \etal is based on the
+Cahn-Hilliard theory. They are able to establish a number of criteria
+for the freezing \eg that at least one reaction must be autocatalytic.

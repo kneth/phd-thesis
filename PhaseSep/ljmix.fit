@@ -1,0 +1,7 @@
+read ljmix2d.data X:1 T:2
+set function poly
+set parameters A 3
+set method svd
+let DY=1
+fit X T DY
+save ljmix2d.new X T TFIT

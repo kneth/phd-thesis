@@ -1,0 +1,14 @@
+rm -f *.aux
+rm -f *.bbl
+rm -f *.blg
+rm -f *.dvi
+rm -f *.log
+rm -f *.lof
+rm -f *.loa
+rm -f *.toc
+latex thesis
+bibtex thesis
+latex thesis
+latex thesis
+dvips thesis.dvi -o thesis.ps
+

@@ -1,0 +1,211 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Inelastic collisions
+%% (C) Copyright 1997 by Kenneth Geisshirt (kneth@chem.ruc.dk)
+%% Last modified: 8 January 1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Inelastic Collisions}
+\label{chap:Inelas}
+Systems consisting of particles undergoing inelastic collisions do
+have a phenomenology of their own. Inelastic collisions are often used
+in models of granular media, see \eg Jaeger \etal \cite{Jaeger96}. This
+chapter will discuss the physical properties of granular media and how
+inelastic collisions can be modelled. In chapter \ref{chap:thermostat}
+simulational results obtained by the author of this thesis and his
+collaborators can be found.
+
+\section{Hard particles}
+\label{sect:HardParticles}
+Hard or rigid particles move, in the absence of an external field, on
+straight lines between two collisions. The interaction between
+the particles are through the collisions only. At the collision of two
+particles, $i$ and $j$, the velocity of each particle is changed
+instantaneously. Let $\vec{v}_i$ and $\vec{v}_j$ denote the velocity
+before collision, and $\vec{v}_i^{\prime}$ and $\vec{v}_j^{\prime}$
+denote the velocity after the collision of particle $i$ and $j$,
+respectively. They are related as:
+
+\begin{subequations}
+  \begin{eqnarray}
+    \vec{v}_i^{\prime} &=& \epsilon \vec{v}_i + (1-\epsilon) \vec{v}_j
+    \\
+    \vec{v}_j^{\prime} &=& (1-\epsilon) \vec{v}_i + \epsilon \vec{v}_j
+  \end{eqnarray}
+\end{subequations}
+where $\epsilon$ is a measure of inelasticity and is related to the
+coefficient of restitution $r$, as $\epsilon = \half (1-r)$. In the case
+of elastic collisions the value of $\epsilon$ is $0$, and completely
+sticky collisions $\epsilon = \half$. 
+
+
+\section{Soft particles}
+\label{sect:SoftParticles}
+The rigid particles which were discussed in the previous section move
+in straight lines between two collisions. When we turn to soft
+particles, it is a completely different story. The particles move in a
+potential field and collisions are not well-defined. 
+
+Models for granular media using soft particles have recently been
+proposed independently by Brilliantov \etal \cite{Brilliantov96} and
+Morgado \etal \cite{Morgado97}. The purpose here is not to review the
+complete work by Brilliantov \etal and Morgado \etal but merely to
+state a simple model which we will use in chapter
+\ref{chap:thermostat}. Our model is only usable in one dimension.
+
+First, let us define what a collision is for soft particles. Consider
+two particles with separation $r$. We will say that the two particles
+are colliding when the separation is less that a given value
+$r_{\smbox{coll}}$ \ie when $r < r_{\smbox{coll}}$. For soft particles,
+collisions have a duration \ie the collisions are not instantaneous
+as collisions of rigid particles.
+
+Elastic colliding particles move according to given equations of motion \ie
+equations in the form:
+
+\begin{subequations}
+  \begin{eqnarray}
+    \diff{\vec{r}_i}{t} &=& \vec{v}_i \\
+    \diff{\vec{v}_i}{t} &=& \frac{\vec{F}_i}{m_i}
+  \end{eqnarray}
+\end{subequations}
+where $\vec{r}_i$ is the position of particle $i$, $\vec{v}_i$ the
+velocity, $m_i$ the mass, and $\vec{F}_i$ the force. We will modify
+the equations of motion so that they include a dissipative term which
+accounts for the inelastic collisions. The new equations of motion are:
+
+\begin{subequations}
+  \begin{eqnarray}
+    \diff{\vec{r}_i}{t} &=& \vec{v}_i \\
+    \diff{\vec{v}_i}{t} &=& \frac{1}{m_i}\left(\vec{F}_i - \vec{F}_i^{(\smbox{coll})}\right) 
+  \end{eqnarray}
+\end{subequations}
+where $\vec{F}_i^{(\smbox{coll})}$ is the dissipative force due to the
+collisions. The force is given by
+
+\begin{equation}
+  \vec{F}_i^{(\smbox{coll})} = \sum_{j\not= i}
+  \vec{F}_{ij}^{(\smbox{coll})}
+\end{equation}
+with
+
+\begin{equation}
+  \vec{F}_{ij}^{(\smbox{coll})} = 
+  \begin{cases}
+    - \gamma v_{ij}\sqrt{r_{\smbox{coll}}-r_{ij}} & \text{for
+      $r<r_{\smbox{coll}}$} \\
+    0 & \text{otherwise}
+  \end{cases}
+\end{equation}
+where $r_{ij} = \|\vec{r}_i - \vec{r}_j\|$ and $v_{ij} = \|\vec{v}_i -
+\vec{v}_j\|$. The parameter $\gamma$ controls the degree of
+inelasticity and when $\gamma = 0$ the collisions are elastic.
+
+
+\section{The cooling problem}
+\label{sect:CoolProblem}
+Haff \cite{Haff83} and McNamara \etal \cite{McNamara93a} have
+investigated the problem of rigid particles undergoing inelastic
+collisions. At every collision kinetic energy dissipates from the
+system. The (granular) temperature is closely related to the kinetic
+energy, namely as
+
+\begin{equation}
+  \mathcal{T} \equiv \frac{1}{N} \sum_{i=1}^N v_i^2 = \frac{2}{m} E_{\smbox{kin}}
+\end{equation}
+
+The definition of the temperature as given by the equation above is
+not correct according to the statistical-mechanical relation. The
+deviation is the factor $1/N$. In statistical mechanics one would find
+that it should be the degrees of freedom which for a one-dimensional
+system in equilibrium is $N-1$. The definition above is adopted of two
+reasons. First, it has previously been used in the literature and
+second, we wish to compare the temperature of simulations of both
+equilibrium and non-equilibrium systems in chapter
+\ref{chap:thermostat}.
+
+As the energy dissipates the temperature is decreasing. Naively
+one could imagine that the temperature will decay exponentially but
+the collision rate (collisions per unit time) does depend on the
+temperature. After one collision the collision rate is slightly lower
+and the time until the next collision is larger. This physical
+behaviour leads to the following cooling law \cite{McNamara93a}:
+
+\begin{equation}
+  \mathcal{T}(t) = \frac{\mathcal{T}_0}{(1+\epsilon\rho \mathcal{T}_0 t)^2}
+\end{equation}
+where $t$ is the time, $\mathcal{T}_0$ is the temperature at time $t=0$, and
+$\rho$ is the density. At late times, $t\gg 1$, the cooling law
+reduces to
+
+\begin{equation}
+  \mathcal{T} = a t^{-2}
+\end{equation}
+where $a$ is a parameter which depends on $\epsilon$ and $\rho$.
+
+The cooling law is a theoretical prediction by Haff \cite{Haff83} and
+McNamara \etal \cite{McNamara93a}. McNamara \etal \cite{McNamara93a,
+McNamara94a} have numerically investigated rigid particles in
+one and two dimensions, and they find that the cooling law is
+obeyed. It is important to stress that the cooling law discussed here
+is valid for rigid particles only. In chapter \ref{chap:thermostat} we
+will study systems of rigid and soft particles numerically and try to
+apply a more general cooling law, namely $\mathcal{T} \propto t^{\alpha}$.
+
+
+\section{Clustering and inelastic collapse}
+\label{InelasCollapse}
+As discussed in section \ref{sect:CoolProblem} a system of inelastic
+particles will algebraically cool down. It has been observed by \eg
+Goldhirsch \etal \cite{Goldhirsch93} that in some cases clusters are
+formed; they refer to this phenomenon as a clustering
+instability. The physical origin of clustering can be explained as
+follows: a spontaneous fluctuation in the density occurs. The temperature
+is uniform, and when the density is locally slightly larger in one
+region, the collision rate in that region will be larger. The
+larger collision rate leads to a faster dissipation \ie the
+temperature decays faster in this region that the rest of the
+system. Now, when the temperature is lower, the pressure will be lower.
+The pressure gradient will attract particles to the region \ie the
+density will increase. We see that a fluctuation large enough will
+lead to an increasing inhomogenity, and the clustering has
+occured. Goldhirsch \etal \cite{Goldhirsch93} have performed Molecular
+Dynamics simulations (in two dimensions) of $2\times 10^5$--$4\times
+10^5$ rigid particles, and they show that clustering is dependent on
+the system size.
+
+McNamara \etal \cite{McNamara93a, McNamara94a} have observed in
+one and two dimensions another phenomenon might occur. In some
+cases inelastic colliding particles might end up in an inelastic
+collapse. The physics of the inelastic collapse is that three or more
+particles are aligned with no separation in between. The consequence is
+that the number of collisions goes to infinity. The collapse depends
+on the number of particles. If the number of particles exceeds a
+certain treshold value, $N_{\smbox{min}}$, the collapse might
+occur. NcNamara \etal estimate the value in the elastic limit to be
+
+\begin{equation}
+  N_{\smbox{min}} = \frac{\log(2/\epsilon)}{2\epsilon}
+\end{equation}
+
+Du \etal \cite{Du95} discuss breakdown of hydrodynamics for
+many-particle systems undergoing inelastic collisions. The breakdown
+reported by Du \etal is not an inelastic collapse but close to the
+clustering instability. It is not too obvious whether the breakdown is
+exactly the same as the clustering or not because the system studied
+by Du \etal is coupled to a thermostating device. In chapter
+\ref{chap:thermostat} we will analyse the thermostating of inelastic
+particles more closely, and present our own simulational results.
+
+\section{Closing remarks}
+Granular media have an interesting and odd phenomenology, and it is not
+an exaggeration to say that granular media are a state of matter
+distinct from the ordinary three states.
+
+Many problems are still open. Granular media can in many cases be
+regarded as a liquid, but no fluid dynamics has been developed. Of
+course a number of attempts has been made, see \eg Haff \cite{Haff83}
+and Jenkins \etal \cite{Jenkins83}, but no complete
+theory exists yet. The mixing and transport of grains and powders are
+heavily used in industrial processes, and therefore a development of a
+fluid mechanics for granular media is important for the design,
+optimisation, and control of industrial processes.

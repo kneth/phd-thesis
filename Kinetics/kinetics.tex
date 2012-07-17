@@ -1,0 +1,357 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chemical Kinetics
+%% (C) Kenneth Geisshirt (kneth@chem.ruc.dk)
+%% Last modified: 31 January 1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Chemical Kinetics}
+\label{chap:ChemKin}
+Chemical kinetics is the study of how fast chemical reactions
+proceed. In this chapter we will review the basic theory of chemical
+kinetics. The only criteria for selecting the material is that it is
+going to be applied to the systems studied in the present thesis.
+
+The theories presented in this chapter are of macroscopic nature. The
+simulations presented in chapter \ref{chap:ExtLotka} are of microscopic
+nature. The topic of the thesis is partly to see if the macroscopic
+description of chemical reaction is valid on a microscopic level.
+
+Many textbooks deal with chemical kinetics, and we will here only
+mention a few. Pilling \etal \cite{Pilling95} have recently written
+an excellent book. It is more experimental oriented than usual
+textbooks, and it covers many of the new techniques and theories. The
+book by Cox \cite{Cox} gives an excellent but short overview of
+reactions in liquid phase.
+
+
+\section{Phenomenological chemical kinetics}
+\label{sect:PhenoChemKin}
+We begin our introduction to chemical kinetics in the macroscopic
+world. The phenomenological approach tries to elucidate the mechanism
+of a complex reaction by writing down a number of differential
+equations which are the ``equations of motion'' of the concentrations
+\ie the goal is to find, for each species $X$, an equation of the form
+
+\begin{equation}
+  \diff{[X]}{t} = f([X], [Y], \ldots) = \nu v([X], [Y], \ldots)
+\end{equation}
+where $Y, \ldots$ represent every other species present in the system,
+$f$ is a function related to its stoichiometric coefficient $\nu$, and
+the velocity $v$ of the reaction. The stoichiometric coefficient is
+positive for products and negative for reactants.
+
+A special class of reactions is the class of \textit{elementary
+  reactions}. For an elementary reaction, the velocity can be written
+using the law of mass action. Consider the reaction
+
+\begin{equation}
+  a A + b B + \cdots \overset{k}{\rightarrow} x X + y Y + \cdots
+\end{equation}
+where $k$ is a proportionality constant called the rate constant. The
+velocity of the reaction is 
+
+\begin{equation}
+  v = k [A]^a[B]^b \cdots
+\end{equation}
+\ie a product over all reactants. The ``equation of motion'' of the
+reactant $A$ is then
+
+\begin{equation}
+  \diff{[A]}{t} = -a\cdot v = -a k[A]^a [B]^b \cdots
+\end{equation}
+while the ``equation of motion'' of the product $X$ is
+
+\begin{equation}
+  \diff{[X]}{t} = x\cdot v = x k[A]^a [B]^b \cdots
+\end{equation}
+
+
+\section{Temperature dependency}
+\label{sect:TempDepend}
+It is well-known that the rate of a reaction depends on the
+temperature. Often Arrhenius is regarded as the discoverer of the
+so-called Arrhenius expression. The expression relates the rate
+constant $k$ and the absolute temperature $T$ as \cite{Pilling95}
+
+\begin{equation}
+\label{eq:Arrhenius}
+  k = Ae^{-E_a/RT}
+\end{equation}
+where $A$ is the pre-exponential factor, $E_a$ is the activation
+energy, and $R$ is the gas constant. A plot of $\log k$ versus $1/T$
+is referred to as the Arrhenius plot for the given reaction. By
+applying simple algebra, we see
+
+\begin{equation}
+  \log k = \log A - \frac{E_a}{R} \frac{1}{T}
+\end{equation}
+\ie an Arrhenius plot should be a straight line with slope
+$-E_a/R$ and intercept $\log A$. 
+
+A more general relationship between the rate constant and the
+temperature can be derived from collision theory, see \eg Pilling
+\etal \cite{Pilling95}. We imagine that the reaction $A+B \rightarrow
+P$ (in gas phase) consists of three reactions, namely
+
+\begin{subequations}
+  \begin{eqnarray}
+    A + B &\rightleftarrows& C \\
+    C     &\rightarrow&     P 
+  \end{eqnarray}
+\end{subequations}
+where $C$ is a collision complex. In words the idea is the
+following. The reactants $A$ and $B$, collide and form a collision
+complex $C$. If the energy of impact is larger than a certain
+threshold $E_a$, the complex will break up and form the product
+$P$, otherwise the reactants are reformed. From collision theory, we
+the obtain the following expression:
+
+\begin{equation}
+\label{eq:rateCollision}
+  k = A^{\prime} \sqrt{T} e^{-\frac{E_a}{RT}}
+\end{equation}
+where $A^{\prime}$ is a pre-exponential factor.
+
+We notice that the equation \eqref{eq:rateCollision} differs from
+equation \eqref{eq:Arrhenius} by a factor of $\sqrt{T}$. In a small
+temperature interval, $A^{\prime}\sqrt{T}$ is almost constant, and we
+will recover the Arrhenius expression.
+
+
+\section{Diffusion-controlled reactions}
+\label{sect:DiffCtrlReacts}
+Diffusion may play an important role for reactions in a condensed
+phase. The basic idea is that two species, say $A$ and $B$, have to
+diffuse together before reacting. Diffusion in two dimensions is very
+different from three dimensions, and we will briefly review the
+results in this section. The problem has been studied by many chemists \eg
+Naqvi \cite{Naqvi74}. We will here use the results obtained by Clegg
+\cite{Clegg86}.
+
+Consider the following reactions in a condensed phase:
+
+\begin{equation}
+  A + B \overset{k_f}{\underset{k_r}{\rightleftarrows}} C
+\end{equation}
+where $k_f$ is the rate constant of the forward reaction, and $k_r$ is
+the rate constant of the reverse reaction.
+
+The solvent does not enter the reactions explicitly, and $A$ and $B$
+must diffuse together in order to react. Let $D_A$ and $D_B$ denote
+the diffusion coefficients of $A$ and $B$, respectively. Moreover, the
+sum of the diffusion coefficients is denoted $D_{AB}$ \ie $D_{AB} =
+D_A + D_B$. The reaction between $A$ and $B$ occurs when the
+separation is less than $R_{\smbox{reac}}$ \ie when $\|\vec{r}_A -
+\vec{r}_B\| < R_{\smbox{reac}}$.
+
+In three dimensions, Clegg \cite{Clegg86} finds the following
+expressions for the rate constants:
+
+\begin{subequations}
+  \begin{eqnarray}
+    k_f &=& \frac{4\pi N_{\smbox{Av}} D_{AB} R_{\smbox{reac}}}{1000} \\
+    k_r &=& \frac{3D_{AB}}{R_{\smbox{reac}}^2} 
+  \end{eqnarray}
+\end{subequations}
+
+However, in two dimensions the situation is more complicated. According
+to Clegg \cite{Clegg86}, the rate constants are given as:  
+
+\begin{subequations}
+  \begin{eqnarray}
+    k_f &=& \frac{2\pi
+      D_{AB}N_{\smbox{Av}}}{\log\left(\frac{R_1(t)}{R_{\smbox{reac}}}\right)} \\
+    k_r &=& \frac{2D_{AB}}{R_{\smbox{reac}}^2
+      \log\left(\frac{R_2(t)}{R_{\smbox{reac}}}\right)}
+  \end{eqnarray}
+\end{subequations}
+where $R_1(t)$ and $R_2(t)$ are two functions of time. 
+
+In both cases, the rate constants depend linearly on the sum of the
+diffusion coefficients. This leads us to the following conclusion: if a
+reaction is diffusion-controlled, the ratio $k/D$ must be constant
+($k$ is the rate constant of the reaction, and $D$ is the diffusion
+coefficients of the reactants). 
+    
+
+\section{Oscillating reactions}
+\label{sect:OscReacts}
+One of the main topics of this thesis is the simulation of oscillating
+chemical reactions. In this section, we will briefly discuss
+oscillating chemical reactions. Recently, Scott \cite{Scott94} has
+written an excellent (and short) introduction to oscillating
+reactions. Oscillations are one of the exotic behaviours we can observe
+in chemical systems. Quasi periodic oscillations and chaos have been
+observed, and in distributed systems (reaction-diffusion systems) target
+patterns and spiral waves have been observed.
+
+As already mentioned in section \ref{sect:PhenoChemKin}, to a set of
+chemical reactions there is an associated set of differential
+equations. In its most condensed form, the set of differential
+equations can be written as
+
+\begin{equation}
+\label{eq:ReacODE}
+  \diff{\vec{c}}{t} = \vec{f}(\vec{c}; \vec{\mu})
+\end{equation}
+where $\vec{c}$ is a vector consisting of the concentrations of the
+species, $\vec{f}$ is the velocity field, and $\vec{\mu}$ is a set of
+parameters. On the mathematical properties of differential
+equations, the monograph by Hirsch \etal \cite{Hirsch74}
+gives a good and not too mathematical introduction while Perko
+\cite{Perko93} treats the subject more rigorously.
+
+
+\subsection{Conditions for oscillations}
+If the solution of equation \eqref{eq:ReacODE} is periodic in time \ie
+$\vec{c}(t+T) = \vec{c}(t)$ for all times $t$, then we have an
+oscillating reaction. A number of conditions must be fulfilled in
+order to obtain a periodic solution. Probably the most important
+condition is that the system must be open (or at least driven). If the
+system is closed, the system will seek an equilibrium state \ie the
+concentrations will become constant. The equilibrium condition is a
+consequence of the second law of thermodynamics. It turns out that a
+crucial condition is that at least one reaction must be
+autocatalytic, see \eg Clarke \cite{Clarke80}. An autocatalytic
+reaction is the chemical term of feedback. A simple example of an
+autocatalytic reaction is 
+
+\begin{equation}
+\label{eq:SimpleReac}
+  A + B \overset{k}{\rightarrow} 2A
+\end{equation}
+
+
+\subsection{Stability}
+If we look at equation \eqref{eq:ReacODE} we can wonder which
+mathematical properties the solution might have. We have already
+discussed the oscillatory behaviour from a chemical point of view. In
+this section, we will be more mathematical than chemical.
+
+The most simple solution of equation \eqref{eq:ReacODE} is a
+stationary solution. The stationary solution is the same as a constant
+solution \ie $\vec{c}(t) = \vec{c}_{ss}$ where $\vec{c}_{ss}$ is a
+constant vector. This stationary state is the root of the function
+$\vec{f}$ \ie the solution of
+
+\begin{equation}
+  \vec{f}(\vec{c}_{ss}; \vec{\mu}) = \vec{0}
+\end{equation}
+
+Now, a stationary state can either be structurally stable, stable or
+unstable. The stability of the stationary state can be evaluated in the 
+following manner. Consider a small perturbation of the stationary
+state, $\vec{c}_p$. The trajectory is the
+solution of equation \eqref{eq:ReacODE} with $\vec{c}_p$ as the
+initial state. The question of stability is answered as follows.
+
+\begin{description}
+  \item[Structurally stable] The stationary state is structurally stable
+    if \protect$d(t) \equiv \|\vec{c}(t) - \vec{c}_{ss}\| \rightarrow 0\protect$
+    as $t \rightarrow \infty$ where $\|\cdot\|$ is a measure of the
+    distance in the concentration space.
+  \item[Unstable] If the function $d(t)$ diverges as $t \rightarrow
+    \infty$, we say that the stationary state is unstable.
+  \item[Stable] If $d(t)$ is bounded but does not go to zero as
+    $t \rightarrow \infty$ we say that the stationary state is
+    stable. If the chemical reaction is oscillatory, its
+    trajectory in the concentration space is bounded but does not
+    approach the stationary state \ie an oscillating chemical reaction
+    has a stable stationary state.
+\end{description}
+
+The stability can easily be computed. Let $\delta \vec{c}$ be defined
+as $\delta\vec{c}(t) \equiv \vec{c}(t)-\vec{c}_{ss}$. The function
+$d(t)$ is related to $\delta\vec{c}$ as $d(t) = \|\delta\vec{c}\|$. If
+we Taylor expand the velocity field to first order, we obtain
+
+\begin{equation}
+\label{eq:LinearODE}
+  \diff{\delta\vec{c}}{t} = \mtrx{J}(\vec{c}_{ss})\cdot \delta\vec{c}
+\end{equation}
+where $\mtrx{J}$ is the Jacobian matrix which elements are given as
+
+\begin{equation}
+  J_{ij} = \frac{\partial f_i}{\partial c_j}
+\end{equation}
+
+Equation \eqref{eq:LinearODE} is a linear ordinary differential
+equation, and the solution is a textbook example. The solution is
+
+\begin{equation}
+  \delta\vec{c} = \sum_{j} \vec{e}_j e^{\imath \omega_j t}
+\end{equation}
+where $\vec{e}_j$ is the $j$th eigenvector of the Jacobian matrix and
+$\omega_j$ is the associated eigenvalue. The stability of the
+stationary point can now be summarised:
+
+\begin{description}
+\item[Structurally stable] If the real part of the any eigenvalue is
+  negative, the stationary point is structurally stable.
+\item[Stable] The stationary point is stable, if the
+  eigenvalues has zero real parts.
+\item[Unstable] If one eigenvalue has a positive real part, the
+  stationary state is unstable.
+\end{description}
+
+\subsection{An example}
+At this point an example would be appropriate. Let us consider the famous
+reaction mechanism called the Brusselator \cite{Prigogine68}.
+The mechanism is
+
+\begin{subequations}
+  \begin{eqnarray}
+    A       &\overset{k_1}{\rightarrow}& X \\
+    2X + Y  &\overset{k_2}{\rightarrow}& 3Y \\
+    B + X   &\overset{k_3}{\rightarrow}& Y + C \\
+    X       &\overset{k_4}{\rightarrow}& D
+  \end{eqnarray}
+\end{subequations}
+
+The species of interest are $X$ and $Y$, and the concentrations of $A$
+and $B$ are assumed to be constant. The phenomenological equations for
+$X$ and $Y$ can be written down. If we scale them appropriately, we
+have
+
+\begin{subequations}
+  \begin{eqnarray}
+    \diff{x}{t} &=& f(x, y) = A - (B+1)x + x^2 y \\
+    \diff{y}{t} &=& g(x, y) = Bx - x^2 y
+  \end{eqnarray}
+\end{subequations}
+where $x$ and $y$ are the scaled concentrations of $X$ and $Y$, and $A$
+and $B$ are the constant concentrations of species $A$ and $B$. The
+stationary point $(x_{ss}, y_{ss})$ can found by solving the set of
+equations:
+
+\begin{subequations}
+  \begin{eqnarray}
+    f(x_{ss}, y_{ss}) &=& A - (B+1)x_{ss} + x_{ss}^2 y_{ss} = 0 \\
+    g(x_{ss}, y_{ss}) &=& Bx_{ss} - x_{ss}^2 y_{ss} = 0
+  \end{eqnarray}
+\end{subequations}
+
+The stationary point is $x_{ss} = A$ and $y_{ss} = \frac{B}{A}$. In
+order to evaluate the stability of the stationary point, we first find
+the Jacobian matrix. It is:
+
+\begin{equation}
+  \mtrx{J}(x_{ss}, y_{ss}) =
+  \left( \begin{array}{cc}
+    B-1 & A^2 \\
+    -B  & -A^2
+  \end{array} \right)
+\end{equation}
+
+The eigenvalues are the solutions of a quadratic equation \ie
+
+\begin{equation}
+  \omega^2 + (A^2 - B +1)\omega + A^2 = 0
+\end{equation}
+
+We see that the stationary point is structurally stable if $A^2 - B +
+1>0$ and $(A^2-B+1)^2 - 4A^2 < 0$. Moreover, we will have a stable
+stationary point if $A^2 - B + 1 = 0$ and $A^2 - B + 1 < 0$ (which
+implies $B > 1$). In the stable case the solution close to the
+stationary point will be oscillatory \ie under certain conditions
+($B>1$) the Brusselator will be an oscillating reaction.

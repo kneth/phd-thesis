@@ -1,0 +1,78 @@
+General overview of Ph.D. thesis
+--------------------------------
+
+*** Preface  ***
+1. Formalities
+
+2. Acknowledgements
+
+
+*** Abstract (in English and Danish)  ***
+
+
+*** Foreword   ***
+1. Finding the right question to ask, the questions asked
+
+
+*** Metaphysics of simulations ***
+1. Computational chemistry as 3rd mode/leg
+
+2. 'Model' of a computer (von Neumann computer)
+
+3. Testing programs
+
+
+*** Chapter        Mechanics ***
+1. Classical mechanics, equations of motion
+
+2. Statistical mechanics, ergodicity/chaoticity, partition function,
+derivation of thermodynamics, phase transitions and diagrams
+
+
+*** Chapter      Theory of liquids  ***
+1. Equation of state
+
+2. Idealised systems (ideal gas, Einstein crystal) versus liquids
+
+3. Equation of state of a hard sphere system
+
+4. Structure factor/radial distribution function
+
+5. Renormalisation groups and critical phenomena
+
+
+*** Chapter      Theory of reactions ***
+1. Collision theory
+
+2. Diffusion-controlled reaction
+
+3. Phenomenological rate laws
+
+4. Bifurcations and oscillating reactions
+
+
+
+*** Chapter    Numerical techniques  ***
+1. Molecular dynamics, integrators, force calculations (and tricks), hard
+spheres
+
+2. Parallellisation, domain decomposition
+
+3. Languages, style and test, speed vs. maintainability
+
+4. Error analysis
+
+
+
+*** Chapter    Extended Lotka  ***
+
+*** Inelastic particles        ***
+
+
+******************
+*** Appendix   ***
+******************
+
+*** Mathematics                ***
+1. Laplacian in polar coordinates
+2. Bessel functions

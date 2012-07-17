@@ -1,0 +1,133 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ph.D. thesis
+%%
+%% (C) Copyright 1996-1997 by Kenneth Geisshirt (kneth@chem.ruc.dk)
+%% Dept. of Life Sciences and Chemistry, Roskilde University
+%%
+%% Last updated: 1 December 1997
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[a4paper,12pt,dvips]{book}
+
+\usepackage[latin1]{inputenc}    % Keyboard
+\usepackage[british]{babel}
+
+\usepackage{cite}
+\usepackage{times}
+\usepackage{xspace}
+
+\usepackage{fancyheadings}
+\usepackage[Conny]{fncychap}
+\usepackage[bf,footnotesize]{caption}
+
+% Math and symbols
+\usepackage{latexsym}
+\usepackage{amsmath, amssymb}
+
+\usepackage{algorithm, algorithmic}
+\usepackage{epic, rotating}
+\usepackage{epsfig, eepic, float}
+\usepackage{subfigure, longtable}
+
+
+%% Layout of a page
+\pagestyle{fancy}
+%\addtolength{\headwidth}{\marginparsep}
+%\addtolength{\headwidth}{\marginparwidth}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]
+  {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]
+  {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+
+
+
+\setlength{\parskip}{0.1cm}
+\setlength{\parindent}{0.0cm}
+
+\begin{document}
+
+%% Hyphenation
+\input{hyphen.tex}
+
+%% Latin
+\newcommand{\ie}[0]{\textit{i.e.,\xspace}}
+\newcommand{\eg}[0]{\textit{e.g.,\xspace}}
+\newcommand{\etc}[0]{\textit{etc.\@\xspace}}
+\newcommand{\abinitio}[0]{\textit{ab initio}}
+\newcommand{\cf}[0]{\textit{cf.\@\xspace}}
+\newcommand{\etal}[0]{\textit{et al.\@\xspace}}
+
+%% Useful mathematics
+\renewcommand{\vec}[1]{{\mathbf{#1}}}
+\newcommand{\diff}[2]{{\frac{\mathrm{d}#1}{\mathrm{d}#2}}}
+\newcommand{\ddiff}[2]{{\frac{\mathrm{d}^2#1}{\mathrm{d}#2^2}}}
+\newcommand{\pdiff}[2]{{\frac{\partial #1}{\partial #2}}}
+\newcommand{\mtrx}[1]{{\mathbf{#1}}}
+\newcommand{\half}[0]{{\scriptstyle\frac{1}{2}}}
+\newcommand{\twothird}[0]{{\small\frac{2}{3}}}
+\newcommand{\bigO}[1]{{\mathcal{O}(#1)}}
+\newcommand{\smbox}[1]{\mbox{\footnotesize #1}}
+\newcommand{\Tr}[0]{\mathrm{Tr}}
+
+%% Units
+\newcommand{\liter}{{\mathrm{l}}}           % litre
+\newcommand{\GB}{{\mathrm{GB}}}             % Gigabyte
+\newcommand{\M}{{\mathrm{\small M}}}        % mol/litre
+\newcommand{\mol}{{\mathrm{mol}}}           % mol
+\newcommand{\meter}{{\mathrm{m}}}           % meter
+
+%% Theorem-like environments
+
+%% Useful commands
+\newcommand{\inputchap}[1]{\input{#1}\clearpage{\pagestyle{empty}\cleardoublepage}}
+
+%% Title page
+\inputchap{Frontpage/frontpage.tex}
+
+%% Abstracts and preface
+\inputchap{Abstract/english.tex}
+\inputchap{Abstract/dansk.tex}   %% Translation of above
+\inputchap{Preface/preface.tex}
+
+%% Table of contents, figures, ...
+\tableofcontents
+\listoffigures
+%\listofalgorithms
+\pagestyle{empty}
+\inputchap{symbols.tex}
+\pagestyle{fancy}
+%% Chapters - generals
+\inputchap{MetaPhys/metaphys.tex}
+\inputchap{Mechanics/mechanics.tex}
+\inputchap{PhaseSep/phasesep.tex}
+\inputchap{Kinetics/kinetics.tex}
+\inputchap{Inelastic/inelastic.tex}
+\inputchap{NumTech/numtech.tex}
+
+%% Chapters - results
+\inputchap{Lotka/extlotka.tex}
+\inputchap{Granular/granular.tex}
+
+%% Conclusion
+\inputchap{Concl/conclusion.tex}
+
+%% Appendices
+%% change to appendices
+\appendix
+\inputchap{Appendix/A.tex}
+\inputchap{Appendix/B.tex}
+\inputchap{Appendix/C.tex}
+\inputchap{Appendix/D.tex}
+
+
+%% Bibliography
+\addtocounter{page}{8}
+\addcontentsline{toc}{chapter}{\numberline{}Bibliography}
+\bibliographystyle{plain}
+\bibliography{kinetics,csm,datalogi,matematik,numanal,fysik,kneth,statmech,granular,fyskem,meta,compsci}
+
+\end{document}

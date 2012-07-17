@@ -1,0 +1,119 @@
+\setlength{\unitlength}{0.00041667in}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined
+% extract first six characters in \fmtname
+\def\x#1#2#3#4#5#6#7\relax{\def\x{#1#2#3#4#5#6}}%
+\expandafter\x\fmtname xxxxxx\relax \def\y{splain}%
+\ifx\x\y   % LaTeX or SliTeX?
+\gdef\SetFigFont#1#2#3{%
+  \ifnum #1<17\tiny\else \ifnum #1<20\small\else
+  \ifnum #1<24\normalsize\else \ifnum #1<29\large\else
+  \ifnum #1<34\Large\else \ifnum #1<41\LARGE\else
+     \huge\fi\fi\fi\fi\fi\fi
+  \csname #3\endcsname}%
+\else
+\gdef\SetFigFont#1#2#3{\begingroup
+  \count@#1\relax \ifnum 25<\count@\count@25\fi
+  \def\x{\endgroup\@setsize\SetFigFont{#2pt}}%
+  \expandafter\x
+    \csname \romannumeral\the\count@ pt\expandafter\endcsname
+    \csname @\romannumeral\the\count@ pt\endcsname
+  \csname #3\endcsname}%
+\fi
+\fi\endgroup
+{\renewcommand{\dashlinestretch}{30}
+\begin{picture}(9024,7839)(0,-10)
+\put(117,6717){\arc{210}{1.5708}{3.1416}}
+\put(117,7707){\arc{210}{3.1416}{4.7124}}
+\put(1707,7707){\arc{210}{4.7124}{6.2832}}
+\put(1707,6717){\arc{210}{0}{1.5708}}
+\path(12,6717)(12,7707)
+\path(117,7812)(1707,7812)
+\path(1812,7707)(1812,6717)
+\path(1707,6612)(117,6612)
+\put(117,3117){\arc{210}{1.5708}{3.1416}}
+\put(117,4107){\arc{210}{3.1416}{4.7124}}
+\put(1707,4107){\arc{210}{4.7124}{6.2832}}
+\put(1707,3117){\arc{210}{0}{1.5708}}
+\path(12,3117)(12,4107)
+\path(117,4212)(1707,4212)
+\path(1812,4107)(1812,3117)
+\path(1707,3012)(117,3012)
+\path(912,6612)(912,4212)
+\blacken\path(882.000,4332.000)(912.000,4212.000)(942.000,4332.000)(882.000,4332.000)
+\put(5517,6717){\arc{210}{1.5708}{3.1416}}
+\put(5517,7707){\arc{210}{3.1416}{4.7124}}
+\put(7107,7707){\arc{210}{4.7124}{6.2832}}
+\put(7107,6717){\arc{210}{0}{1.5708}}
+\path(5412,6717)(5412,7707)
+\path(5517,7812)(7107,7812)
+\path(7212,7707)(7212,6717)
+\path(7107,6612)(5517,6612)
+\put(3717,3117){\arc{210}{1.5708}{3.1416}}
+\put(3717,4107){\arc{210}{3.1416}{4.7124}}
+\put(5307,4107){\arc{210}{4.7124}{6.2832}}
+\put(5307,3117){\arc{210}{0}{1.5708}}
+\path(3612,3117)(3612,4107)
+\path(3717,4212)(5307,4212)
+\path(5412,4107)(5412,3117)
+\path(5307,3012)(3717,3012)
+\put(7317,3117){\arc{210}{1.5708}{3.1416}}
+\put(7317,4107){\arc{210}{3.1416}{4.7124}}
+\put(8907,4107){\arc{210}{4.7124}{6.2832}}
+\put(8907,3117){\arc{210}{0}{1.5708}}
+\path(7212,3117)(7212,4107)
+\path(7317,4212)(8907,4212)
+\path(9012,4107)(9012,3117)
+\path(8907,3012)(7317,3012)
+\put(1917,117){\arc{210}{1.5708}{3.1416}}
+\put(1917,1107){\arc{210}{3.1416}{4.7124}}
+\put(3507,1107){\arc{210}{4.7124}{6.2832}}
+\put(3507,117){\arc{210}{0}{1.5708}}
+\path(1812,117)(1812,1107)
+\path(1917,1212)(3507,1212)
+\path(3612,1107)(3612,117)
+\path(3507,12)(1917,12)
+\put(5517,117){\arc{210}{1.5708}{3.1416}}
+\put(5517,1107){\arc{210}{3.1416}{4.7124}}
+\put(7107,1107){\arc{210}{4.7124}{6.2832}}
+\put(7107,117){\arc{210}{0}{1.5708}}
+\path(5412,117)(5412,1107)
+\path(5517,1212)(7107,1212)
+\path(7212,1107)(7212,117)
+\path(7107,12)(5517,12)
+\path(4512,3012)(2712,2412)
+\path(912,3012)(2712,2412)(2712,1212)
+\blacken\path(2682.000,1332.000)(2712.000,1212.000)(2742.000,1332.000)(2682.000,1332.000)
+\path(4512,3012)(6312,2412)
+\path(8112,3012)(6312,2412)(6312,1212)
+\blacken\path(6282.000,1332.000)(6312.000,1212.000)(6342.000,1332.000)(6282.000,1332.000)
+\path(1812,7212)(5412,7212)
+\blacken\path(5292.000,7182.000)(5412.000,7212.000)(5292.000,7242.000)(5292.000,7182.000)
+\path(6312,6612)(4512,4212)
+\blacken\path(4560.000,4326.000)(4512.000,4212.000)(4608.000,4290.000)(4560.000,4326.000)
+\path(6312,6612)(8112,4212)
+\blacken\path(8016.000,4290.000)(8112.000,4212.000)(8064.000,4326.000)(8016.000,4290.000)
+\put(2787,2037){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Compare}}}}}
+\put(6387,2037){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Compare}}}}}
+\put(987,4962){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}experiments}}}}}
+\put(987,5187){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Perform}}}}}
+\put(5412,5187){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Perform}}}}}
+\put(5412,4887){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}simulations}}}}}
+\put(7437,5187){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Deduce theories}}}}}
+\put(2862,7287){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Make a model}}}}}
+\put(537,3762){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Experi-}}}}}
+\put(537,3462){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}mental}}}}}
+\put(537,3162){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}results}}}}}
+\put(2337,687){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Test of}}}}}
+\put(2337,387){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}the model}}}}}
+\put(5712,612){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Test of the theory}}}}}
+\put(4287,3837){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Exact}}}}}
+\put(4287,3462){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}results}}}}}
+\put(4287,3162){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}for the model}}}}}
+\put(7662,3687){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Theoretical}}}}}
+\put(7662,3387){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}predictions}}}}}
+\put(6012,7137){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Model}}}}}
+\put(312,7287){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}Physical/chemical}}}}}
+\put(312,6987){\makebox(0,0)[lb]{\smash{{{\SetFigFont{6}{7.2}{rm}system}}}}}
+\end{picture}
+}

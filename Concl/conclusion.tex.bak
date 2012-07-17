@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Conclusion
+%% (C) Kenneth Geisshirt (kneth@chem.ruc.dk)
+%% Last modified: 6 November 1997
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusion and Discussion}
+\label{chap:Conclusion}
+
+We have in this thesis presented simulational results of two very
+different systems: oscilling chemical reactions and dissipative gases.
+Both systems have two things in common: they are in a non-equilibrium
+state, and they have been investigated by Molecular Dynamics.
+
+The systems studied in this thesis are ``simple''. They are simple in
+the underlaying physical model, but the phenomenology is indeed not
+simple. Even though the models are simple, we strongly believe that
+these models are able to capture some of the phenomena seem in the Nature.
+
+Molecular Dymanics is an invaluable tool when many-particle systems are
+studied. Two special-purpose MD programs have been designed and
+implemented by the author; one for Lennard-Jones particles and one for
+rigid particles. The advantage of MD is that a MD program can be used
+in equilibrium and non-equilibrium situations. We see Molecular
+Dynamics as the link between the advanced theories and the complicated
+experiments. General-purpose Molecular Dynamics programs exist but they
+have an orientation toward biological problems (proteins in aquaous
+solution). MD programs for simple liquids (Lennard-Jones-like
+potentials) and rigid particles are typically written by the
+chemist/physist who is going to use them. But no chemist can keep up with
+the pace of development of computers, especially the new parallel
+computers. An important project would be to implement - using modern
+software engineering methods - novel algorithms on state-of-the-art
+computers. Moreover, it is important to design and implement a number of
+tools which can analyse data, and an easy-to-use graphical user interface
+(GUI) is nowadays essential.
+
+The rich phenomenology of dissipative gases and granular media has
+surprised us. In order to be able to model granular media, we will need
+macroscopic descriptions analogue to fluid mechanics and
+thermodynamics. As far as we see it, Molecular Dynamics is at the
+moment the only reliable method with can model granular media. The
+validation of a fluid mechanics can therefore only be done with the
+help from MD. 
+
+Using Molecular Dynamics to study chemical reactions is not a new idea;
+in fact it is more that two decades ago the first simulations were
+performed. We have clearly demonstrated in this thesis that the
+macroscopic phenomena can be reproduced in a finite system using MD. In
+other words, MD is able to reproduce the macroscopic world, and even
+better than that: the idea behind MD is so na\"{i}ve that it is much
+easier to understand the physical model.
+
+
+The interest in the interplay of (energetically driven) chemical
+reactions and phase separation has in recent time increased (measured
+by the number of papers per year). Almost all studies have so far been carried
+out on a mesoscopic level (Hilliard-Cahn theory). Molecular Dynamics is
+in this context an invaluable tool because the number of simplifying
+assumptions is limited. Simulations of phase separation and chemical
+reactions are computer intensive. In order to see pattern formation we
+need a large number (often $5\cdot 10^5$ particles) of particles and follow the
+system over long time scales. The simulations presented in this thesis
+are not exhausting in the sence that they are only the begining. We
+have demonstrated a phase separation is able to change the unerlaying
+mechanism of chemical reactions. 

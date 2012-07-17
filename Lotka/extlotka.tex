@@ -1,0 +1,463 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% analysis and results of the extended Lotka scheme
+%% (C) Kenneth Geisshirt (kneth@chem.ruc.dk) 
+%% Last modified: 30 January 1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{The Extended Lotka Scheme}
+\label{chap:ExtLotka}
+
+Oscillating chemical reactions have intrigued chemists and many others
+in the last 2--3 decades. The best known example is the reaction first
+investigated by Belousov \cite{Belousov58} and Zhabotinsky
+\cite{Zhabotinsky64}. One can only be fascinated by seeing the
+solution in the reaction vessel changing colour every minute from deep
+blue to red and back to blue again.
+
+In this chapter we will look at simulations performed on a very simple
+chemical mechanism, which is able to exhibit oscillations in the
+concentrations as function of time. The mechanism is simulated by
+Molecular Dynamics, and it is therefore a simulation with a finite
+number of particles. It should be regarded as a prototype of an
+oscillating chemical reaction.
+
+The chapter is based upon the results described in two papers by the
+author of the present thesis, Eigil L.\ Pr{\ae}stgaard, and
+S{\o}ren Toxv{\ae}rd \cite{Geisshirt96a, Geisshirt97a} which are enclosed
+as appendix \ref{app:B} and appendix \ref{app:C}
+
+
+\section{A brief outline of previous studies}
+The simulation of chemical reactions by Molecular Dynamics is not a
+new approach. As early as 1975, Portnow \cite{Portnow75} simulated a
+simple chemical reaction by Molecular Dynamics. Portnow studied the
+fluctuations in the number density of the species \ie the
+concentration. The simulated particles were hard spheres.
+
+Ortoleva and coworkers \cite{Ortoleva76} were the first
+to do MD simulations of chemical instabilities more than two decades
+ago. The simulated mechanics was:
+
+\begin{eqnarray*}
+  X + Y &\rightarrow& 2X \\
+  X     &\rightarrow& Y  \\
+  Y     &\rightarrow& X
+\end{eqnarray*}
+
+The last two reactions are introduced in order to prevent that $Y$ is
+converted to $X$. Ortoleva \etal imagined that the two reactions were
+radiation processes so that the system can be far from equilibrium but
+without a mass flux \ie the system is energetically driven. The
+individual particles were hard spheres, and Ortoleva \etal simulated
+up to 450 particles.  
+
+Boissonade \cite{Boissonade79} studied almost two decades ago the
+fluctuations in the concentration in two simple mechanisms
+($A+C\rightarrow X+C, 2X\rightarrow 2N$ and $A+C \rightarrow X+C, 2X
+\rightarrow X+N$). The system was two-dimensional and the particles
+were hard disks. The simulation results are compared with a
+master-equation approach.
+
+In 1983 Heinrichs \etal \cite{Heinrichs83} performed simulations on
+another oscillating reaction. The scheme was:
+
+\begin{eqnarray*}
+  A + B &\rightarrow& C     \\
+  C + B &\rightarrow& D + B \\
+  D     &\rightarrow& 2 B 
+\end{eqnarray*}
+
+In order to simulate an open system, Heinrichs \etal introduced an
+inflow and an outflow of particles \ie the species $A$, $B$, $C$ and $D$
+are created and removed randomly. Furthermore, there is an inert
+species, $X$. If there are any inert species present in the system, an
+$X$ particle is converted to one of the other species which mimics an
+open system. If no inert species are present, a new particle is
+created at a randomly chosen position. The first reaction creates an
+inert particle, because the reaction really is $A+B \rightarrow
+C+X$. In the third reaction a new particle (of type $B$) is
+created. If the number of inert particles is larger than a certain
+value, some of them are removed. All particles are hard spheres. It is
+hard to tell exactly which ensemble Heinrichs \etal were simulating.
+
+Recently, Diebner \etal \cite{Diebner95} simulated a very simple
+mechanism. The mechanism is the same as we will present in section
+\ref{sect:ExtLotkaMech}. The
+particles interact through a long-ranged potential; basically a
+repulsive Coulomb potential. The main result is that the mechanism is
+oscillatory even on the microscopic level. In a very different
+context, Frachebourg \etal \cite{Frachebourg96} have studied the same
+mechanism as Diebner \textit{et al}.\footnote{Frachebourg \etal call the
+  mechanism the cyclic Lotka-Volterra mechanism.} Moreover, Gorecki
+\etal \cite{Gorecki97} have studied the same mechanism using hard
+sphere Molecular Dynamics and a master equation. They conclude that the
+spatial correlation functions oscillate in time, and that the
+correlations are longer than for a stationary system.
+
+Mansour \etal \cite{Mansour92} have recently written a very detailed
+paper about the simulation of chemical reactions on a microscopic
+level. The primary objective is to investigate complex mechanisms,
+including oscillating reactions. The simulation technique is
+\textit{not} Molecular Dynamics in the context of this thesis, but
+is based upon Bird's algorithm \cite{Bird96} which is a numerical
+solution of the Boltzmann equation. The particles considered by Mansour
+\etal are hard spheres, and all reactions are binary.
+
+
+To the best of our knowledge, only Toxv{\ae}rd \cite{Toxvaerd96a} has
+considered reactions simulated by Molecular Dynamics in competition
+with a phase transition (in that case, a spinodal decomposition). The
+simulated system was a binary mixture of Lennard-Jones particles, and
+the reaction scheme was $A \rightleftarrows B$. The result from these 
+simulations is that chemical reactions have a strong influence on the
+kinetics of the spinodal decomposition. In the last years an number of
+papers has been published on which influence chemical reactions may
+have on the phase separation process, see \eg Glotzer \etal
+\cite{Glotzer94,Glotzer95}, Christensen \etal \cite{Christensen96}, and
+Verdasca \etal \cite{Verdasca95}. The papers mainly investigate the
+problem by modifying the Cahn-Hilliard equation to include chemical
+reactions, and then solve it numerically. Recently, Carati \etal
+\cite{Carati97} have contributed to the theoretical understanding by
+analysing a such a Cahn-Hilliard based model. The work of Carati \etal
+is mainly analytically, and their theoretical predictions have not been
+be verified by \eg Molecular Dynamics simulations.
+
+
+\section{The scheme}
+\label{sect:ExtLotkaMech}
+Lotka was one of the pioneers in the field of oscillating chemical
+reactions. His work dates back to 1910s and 1920s, and his work was
+purely theoretical - he himself was not convinced that oscillating
+chemical reactions could occur in the real world. At the end of a paper
+from 1910, Lotka wrote \cite{Lotka10}:
+
+\begin{quotation}
+\noindent No reaction is known to follow the above law [oscillatory],
+and as a matter of fact the case here considered was suggested by the
+consideration of matters lying outside the field of physical
+chemistry.
+\end{quotation}
+
+His famous scheme from 1920 is \cite{Lotka20}:
+
+\begin{subequations}
+  \begin{eqnarray}
+    A + X   &\rightarrow& 2X \\
+    X + Y   &\rightarrow& 2Y \\
+    Y       &\rightarrow& P
+  \end{eqnarray}
+\end{subequations}
+
+The scheme above gives raise to oscillations in concentrations of $X$ and $Y$
+when certain conditions are fulfilled. 
+
+Lokta's scheme takes place in an open system; there is a constant
+inflow of the species $A$ so that the concentration can be assumed to be
+constant. Moreover, there is a constant outflow of the product
+$P$.
+
+Our scheme is very simple; it consists of three reactions and three
+species only. We call it the extended Lotka scheme since it resembles
+the Lotka scheme, and it is:
+
+
+\begin{subequations}
+  \begin{eqnarray}
+    X + Y &\overset{k_1}{\rightarrow}& 2Y \label{Reac1} \\
+    Y + Z &\overset{k_2}{\rightarrow}& 2Z \label{Reac2} \\
+    Z + X &\overset{k_3}{\rightarrow}& 2X \label{Reac3}
+  \end{eqnarray}
+\end{subequations}
+where $k_1$, $k_2$, and $k_3$ are the rate constants. We choose to let
+the total concentration $[X]+[Y]+[Z]$ be constant and denoted $K$,
+because we simulate a system where the total number of particles is
+conserved. The scheme above violates the Wegschleider conditions
+\cite{Diebner95}. This means that the extended Lotka scheme is
+energetically driven, and the system will therefore always been far
+from equilibrium.
+
+From the reactions above, we are able to derive phenomenological
+equations that describe the evolution of the concentrations. We
+obtain three equations from the scheme given above:
+
+\begin{subequations}
+  \label{eq:PhenoODE}
+  \begin{eqnarray}
+    \diff{[X]}{t} &=& -k_1[X][Y] + k_3[X][Z] \label{eq:PhenoODEA} \\
+    \diff{[Y]}{t} &=&  k_1[X][Y] - k_2[Y][Z] \label{eq:PhenoODEB} \\
+    \diff{[Z]}{t} &=&  k_2[Y][Z] - k_3[X][Z] \label{eq:PhenoODEC}
+  \end{eqnarray}
+\end{subequations}
+
+The differential equations above is an initial value problem, and given
+the initial values of the concentrations of the three species, the
+solution is unique. We have in principle three differential equations
+but since the total concentration is constant, the solution will be in
+a two-dimensional subspace of the three-dimensional concentration
+space spanned by $[X]$, $[Y]$ and $[Z]$. A two-dimensional ordinary
+differential equation cannot have chaotic solutions; this observation
+is a consequence of the Poincar\'{e}-Bendixson theorem \cite[chapter
+11]{Hirsch74}.
+
+\section{Linear stability}
+\label{sect:LinStabil}
+The solution of the three phenomenological equations given in the
+previous section will give us the evolution of concentrations of the
+three species. But it is not possible to find an analytical solution. 
+
+Instead of an analytical solution, we are able to obtain an
+approximate solution. We will apply the technique of linear stability
+of stationary points. The technique is introduced in section
+\ref{sect:OscReacts}.
+
+To begin, we find the stationary point \ie a point in the
+concentration space where the differential is zero \ie we wish
+to solve the set of equations:
+
+\begin{subequations}
+  \label{eq:StatPoint}
+  \begin{eqnarray}
+    \diff{[X]}{t} &=& -k_1[X][Y] + k_3[X][Z] = 0 \\
+    \diff{[Y]}{t} &=&  k_1[X][Y] - k_2[Y][Z] = 0 \\
+    \diff{[Z]}{t} &=&  k_2[Y][Z] - k_3[X][Z] = 0
+  \end{eqnarray}
+\end{subequations}
+
+Let the stationary point be denoted $(x_{ss}, y_{ss}, z_{ss})$. At the
+stationary point, the condition $K=x_{ss}+y_{ss}+z_{ss}$ must be
+fulfilled. Solving equation \eqref{eq:StatPoint} we obtain
+
+\begin{subequations}
+  \label{eq:SteadyState}
+  \begin{eqnarray}
+    x_{ss} &=& \frac{Kk_2}{k_1+k_2+k_3} \\
+    y_{ss} &=& \frac{Kk_3}{k_1+k_2+k_3} \\
+    z_{ss} &=& \frac{Kk_1}{k_1+k_2+k_3}
+  \end{eqnarray}
+\end{subequations}
+
+Close to the stationary point, we can linearise the ordinary
+differential equations and solve the linear equations. The
+approximative solution close to the stationary point is then 
+
+\begin{equation}
+  \left(\begin{array}{c}\, [X]\\ \, [Y]\\ \, [Z]\end{array}\right)
+  =   \left(\begin{array}{c} x_{ss}\\ y_{ss}\\ z_{ss}\end{array}\right)
+   + \sum_i \vec{e}_i e^{\lambda_i t}
+\end{equation}
+where $\vec{e}_i$ is the $i$th eigenvector (scaled appropriately) and
+$\lambda_i$ is the $i$th eigenvalue of the Jacobian matrix. We are
+only interested to see whether the extended Lotka scheme is
+oscillatory, so we only calculate the eigenvalues. The extended Lotka
+scheme has one zero eigenvalue and two complex conjugated which are
+
+\begin{equation}
+  \lambda = \pm \frac{K\sqrt{k_1+k_2+k_3}}{\sqrt{k_1k_2k_3}} \imath
+\end{equation}
+
+We conclude that the stationary state is stable, and the
+motion (close to the stationary state) is a harmonic oscillation.
+
+\section{Molecular details}
+\label{sect:MolecDetail}
+The extended Lotka mechanism as analysed in the previous sections, can
+be simulated by Molecular Dynamics. In this section we discuss the
+molecular details. 
+
+The three species, $X$, $Y$ and $Z$, are chosen to be atoms. The
+interaction potential is the Lennard-Jones potential \ie
+
+\begin{equation}
+\label{eq:LJpot}
+  u_{\smbox{LJ}}(r) = 4\epsilon \left[\left(\frac{\sigma}{r}\right)^{12} -
+    \left(\frac{\sigma}{r}\right)^6 \right]
+\end{equation}
+where $\epsilon$ is the minimum of the potential (and the fundamental
+energy unit), and $\sigma$ is the characteristic length. The minimum
+of the potential is easily\footnote{Differentiate
+  \protect$u_{\smbox{LJ}}(r)\protect$ with respect to
+  \protect$r\protect$, set it equal to zero and solve with respect to
+  \protect$r\protect$.} found to be $\sqrt[6]{2}\sigma$. 
+
+We have simulated two different systems. They are:
+
+\begin{description}
+\item[System 1] All the particles are identical \ie the difference is
+  only the ``colour'' of the particles. The ``colour'' represent the
+  species \ie in our case there are three ``colours''. The potential
+  is $u_{\smbox{I}}(r) = u_{\smbox{LJ}}(r)$.
+\item[System 2] The particles of the same ``colour'' interact through
+  the Lennard-Jones potential given by equation
+  \eqref{eq:LJpot}. Particles of different ``colours'' \eg the $X$-$Y$
+  interaction, is non-attractive. In order to simulate this, we use
+  the following potential
+
+  \begin{equation}
+    u_{\smbox{II}}(r) = 
+    \begin{cases}
+      u_{\smbox{LJ}}(r) &\text{for $r\le \sqrt[6]{2}\sigma$} \\
+      0                 &\text{otherwise}
+    \end{cases}
+  \end{equation}
+\end{description}
+
+A system like System 2 is known to phase separate below a certain
+critical temperature \cite{Laradji96,Toxvaerd95a}.
+
+As mentioned in section \ref{sect:SimulChemReact}, the simulation of
+chemical reactions requires two parameters for a binary reaction. The
+first parameter is the sum of radii of two colliding particles,
+$R_{\smbox{reac}}$. In most cases we set $R_{\smbox{reac}}=0.96116\sigma$
+which ensures that only particles with a large relative velocity might
+be counted as colliding particles. The algorithms presented in chapter
+\ref{chap:NumTech} are applied, and the temperature is controlled by the
+Nos\'{e}-Hoover thermostat.
+
+
+\section{Steady and oscillatory states in the microscopic system}
+In section \ref{sect:LinStabil} we found the stationary state for the
+extended Lotka scheme. A stationary state is a state where the
+concentrations are constant. If the phenomenological equations
+\eqref{eq:PhenoODE} represent the microscopic details of the system,
+the steady state given by equation \eqref{eq:SteadyState} must be
+reproducible by the MD simulations. 
+
+Consider a system where $k_1=k_2=k_3$. The steady state is then
+$x_s=y_s=z_s = \frac{K}{3}$. We set up a simulation with $1/3$ of
+the particles of each species. Figure \ref{fig:steady} shows the
+result. From the figure it is obvious that a steady state exists for
+the finite system. The fluctuations in the concentration (measured by
+the particle fraction) decrease with the number of particles.
+
+\begin{figure}
+  \begin{center}
+%\epsfig{file=Lotka/steady.ps,width=7.5cm,height=7.5cm}
+    \input{Lotka/steady.tex}
+  \end{center}
+  \caption[The steady state]{The particle fraction of \protect$X\protect$ versus
+    time. The simulation parameters are: \protect$\rho=0.8\sigma^2\protect$,
+    \protect$T=2.0\epsilon/k_B\protect\protect$,
+    \protect$P_r^{(1)}=P_r^{(2)}=P_r^{(3)} = 10^{-3}\protect$, and
+    \protect$R_{\smbox{reac}}=0.969116\sigma\protect$. The line with
+    the large fluctuations is for a system of 1024 particles while the
+    other line is for a system of 65536 particles.\label{fig:steady}}
+\end{figure}
+
+We also know from section \ref{sect:LinStabil} that the extended Lotka
+scheme is oscillatory. Figure \ref{fig:osc} shows the particle fraction of
+$X$. We see that the concentration of $X$ oscillates. The oscillations are
+not regular but this is due to the fact that the system consists of 1024
+particles only..
+
+\begin{figure}
+  \begin{center}
+    \input{Lotka/osc.tex}
+  \end{center}
+  \caption[The oscillatory state]{The particle fraction of $X$ versus time.
+   The simulation parameters are the same as in figure \ref{fig:steady} except
+   that the number of particles is 1024 and $P_r^{(2)} = 1.1\cdot 10^{-3}$.
+   \label{fig:osc}}
+\end{figure}
+
+
+\section{Phase transitions and mechanisms}
+Mixtures of Lennard-Jones particles, which interact as described in
+section \ref{sect:MolecDetail} (System 2) are known to phase separate,
+see \eg Laradji \etal \cite{Laradji96} and Toxv{\ae}rd \etal
+\cite{Toxvaerd95a}. Above a 
+certain critical temperature $T_c$, the system will be homogeneous
+\ie the density of each component is constant through the
+system. Below the critical temperature, we will see domains of each
+components. For a two-component system, the equilibrium distribution
+of components is that there are two large domains consisting of
+one component only. For three- and four-component systems, the
+formation of domains is more complex. 
+
+We have simulated a three-component Lennard-Jones system. It is easy
+to see whether a phase separation has occurred at a given
+temperature. This is done by looking a the positions of the particles
+by the naked eye. Figure \ref{fig:PhaseSep} shows two examples; one
+above and one below the critical temperature.
+
+\begin{figure}
+  \centering
+  \mbox{
+    \subfigure[$T < T_C$]{\epsfig{file=Lotka/conf.below.ps,width=5cm,height=5cm}}\quad
+    \subfigure[$T > T_C$]{\epsfig{file=Lotka/conf.above.ps,width=5cm,height=5cm}}
+  }
+  \caption[Configurations below and above the critical temperature]{(a)
+  shows the positions of the particles at
+  temperature \protect$T=1.0\epsilon/k_B  < T_c\protect$, while the
+  (b) is taken at temperature \protect$T=2.5\epsilon/k_B >
+  T_c\protect$. The number of particles is 16386 and the density is
+  $0.8\sigma^2$ in both cases.\label{fig:PhaseSep}}
+\end{figure}
+
+We measure the (time averaged) rate constants from the
+simulations. Figure \ref{fig:Arrhenius1024} shows the Arrhenius plot
+for both System 1 and 2 with 1024 particles, and System 2 with 4096
+particles. It is clear that at $T_c = 1.7\epsilon/k_B$ there is a
+cross-over for System 2. This is the phase separation we see. Below
+$T_c$ System 2 is phase separating while above $T_c$ it behaves
+essentially as System 1. 
+
+\begin{figure}
+  \begin{center}
+%    \epsfig{file=Lotka/arrh.ps,height=7.5cm,width=7.5cm}
+    \input{Lotka/arrh.tex}
+  \end{center}
+  \caption[Arrhenius plot]{The Arrhenius plot for System 1 ($\times$, $N=1024$), System 2
+    ($+$, $N=1024$), and System 2 ($*$, $N=4096$). The density is
+    $0.8\sigma^2$. The reaction parameters are \protect$P_r^{(1)} =
+    P_r^{(3)} = 1.0\cdot 10^{-3}\protect$, \protect$P_r^{(2)} = 1.1\cdot
+    10^{-3}\protect$, \protect$R_{\smbox{reac}} =
+    0.969116\sigma\protect$.\label{fig:Arrhenius1024}} 
+\end{figure}
+
+As discussed in section \ref{sect:DiffCtrlReacts} the ratio $k/D$ must
+be constant if the reaction is diffusion-controlled ($k$ is the rate
+constant, and $D$ is the diffusion coefficient). Figure
+\ref{fig:kDratio} shows the $k/D$ ratio versus temperature for System
+2. We see that above $T_c$ the ratio is - within
+the statistical error - constant. This clearly indicates that the
+reactions are diffusion-controlled above the critical temperature,
+while below $T_c$ the mechanism is different. Below the critical temperature
+the mechanism changes to a surface-driven reaction because below $T_c$
+domains are formed. The domains are pure \ie they consist of one
+species only. Therefore the only place where the reactions can occur
+is at the boundaries of two domains.
+
+\begin{figure}
+  \begin{center}
+%    \epsfig{file=Lotka/kD.ps,height=7.5cm,width=7.5cm}
+    \input{Lotka/kD.tex}
+  \end{center}
+  \caption[Plot of $k_1/D$]{The ratio \protect$k_1/D\protect$ versus the
+    temperature. The simulation parameters are the same as in figure
+    \protect\ref{fig:Arrhenius1024}.\label{fig:kDratio}}
+\end{figure}
+
+
+\section{Concluding remarks}
+In this chapter we have presented results from microscopic simulations
+of the extended Lotka scheme. It is clearly demonstrated that the
+technique of MD can be used to simulate chemical reactions.
+
+The simulations presented in the chapter show that macroscopic
+phenomena can be reproduced by microscopic simulations \eg the steady
+state of a complex mechanism. We are able to probe spatial phenomena
+like pattern formation from a very simple point of view which require
+only few and simple assumptions.
+
+We also see that simple theoretical considerations can be applied with
+success. For example the theory of diffusion-controlled reactions can
+easily be applied.
+
+The chapter clearly demonstrates that a phase transition may alter the
+underlying chemical mechanism. Lately this subject has attracted some
+attention, see \eg Carati \etal \cite{Carati97}. By using MD we would be able
+to investigate theoretical predictions by Carati \etal. We have performed a
+few number of simulations of a simple scheme, namely
+$2A \rightleftarrows A + B \rightleftarrows 2B$. Our initial simulations show
+that this mechanism is able to freeze the spinodal decomposition as
+predicted by Carati \etal.

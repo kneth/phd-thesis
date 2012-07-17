@@ -1,0 +1,481 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Mechanics
+%% (C) Kenneth Geisshirt (kneth@chem.ruc.dk)
+%% Last modified: 8 January 1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Mechanics}
+\label{chap:Mech}
+
+In this chapter we will outline classical mechanics. It is not a
+tutorial and the purpose is to enable the reader to understand later
+chapters. Classical mechanics can without problems be applied to many
+systems. In this thesis classical mechanics is used to describe
+microscopic details of simple liquids. This approximation is valid at
+high temperatures. High temperatures are not high in the everyday meaning
+of the word \eg classical mechanics is suitable to describe methane
+($\mathrm{CH}_4$) at 90 K.
+
+Moreover, we will discuss statistical mechanics which is the underlying
+basis of the thesis. Briefly stated, statistical mechanics links
+the microscopic world (a many-body problem) with the macroscopic world
+(thermodynamics).
+
+
+\section{Classical mechanics}
+\label{sect:CM}
+Classical mechanics is one of the major physical theories. The
+most well-known textbook is probably the textbook by Goldstein
+\cite{Goldstein80}, and we will only cite this textbook.
+
+The most important physical law in mechanics is Newton's second
+law. It relates the acceleration of a body to the force acting on the
+body. More precisely it is
+
+\begin{equation}
+  \vec{F} = m\vec{a}
+\end{equation}
+where $\vec{F}$ is the force, $\vec{a}$ the acceleration, and $m$ is
+the mass of the body. Since the acceleration is the second derivative
+of the position $\vec{r}$, we can easily write down the equations of
+motion. For an $N$-body system, the equations of motion are
+
+\begin{subequations}
+\label{eq:mechEOM}
+  \begin{eqnarray}
+    \diff{\vec{r}_i}{t} &=& \vec{v}_i \\
+    \diff{\vec{v}_i}{t} &=& \frac{\vec{F}_i}{m_i}
+  \end{eqnarray}
+\end{subequations}
+where $\vec{v}_i$ is the velocity of the $i$th body.
+
+The equations of motion can be written in many different ways. The
+Hamiltonian formulation is very useful, and which is equivalent to the
+formulation above. We begin by writing down
+a function called the Hamiltonian, $\mathcal{H}$. The equations of motion
+is then given by
+
+\begin{subequations}
+  \begin{eqnarray}
+    \diff{\vec{r}_i}{t} &=& \pdiff{\mathcal{H}}{\vec{p}_i} \\
+    \diff{\vec{p}_i}{t} &=& -\pdiff{\mathcal{H}}{\vec{r}_i}
+  \end{eqnarray}
+\end{subequations}
+where $\vec{p}_i$ is the momentum of the $i$th body. The partial
+differentiation on the right hand side should be interpreted as a
+compact notation of partial differentiation with respect to the
+component in each direction.
+
+
+\subsection{Basic properties}
+\label{sect:BasicProp}
+The Hamiltonian $\mathcal{H}$, is composed of two terms which
+dependent on either the positions or the momenta \ie
+
+\begin{equation}
+\label{eq:HamilSimple}
+  \mathcal{H}(\vec{r}_i, \vec{p}_i) = K(\vec{p}_i) + V(\vec{r}_i)
+\end{equation}
+
+The first term $K$, can be shown to be the kinetic energy
+$E_{\smbox{kin}}$ \ie
+
+\begin{equation}
+  E_{\smbox{kin}} = K = \frac{1}{2} \sum_{i=1}^N \frac{1}{m_i}|\vec{p}_i|^2
+\end{equation}
+
+The second term is the potential energy, \ie $V = E_{\smbox{pot}}$. The
+Hamiltonian is, in other words, the total energy, and Liouville's
+theorem states that for an isolated system the Hamiltonian is constant
+which implies that the total energy is constant.
+
+The equations of motion are time reversible. This means that there is
+no arrow of time; the future and the past are equal in the sense that
+a change of sign transforms the future into the past and \textit{vice
+  versa}.
+
+
+\subsection{The force term}
+\label{sect:ForceTerm}
+The force, $\vec{F}_i$, in equation \eqref{eq:mechEOM} represents the
+interaction between the $N$ bodies. For the $i$th body, we will assume
+that the force can be written as
+
+\begin{equation}
+  \vec{F}_i = \sum_{i\not= j} \vec{f}_{ij}
+\end{equation}
+where $\vec{f}_{ij}$ is the force between body $i$ and $j$. For the
+systems studied in the present thesis, the force term $\vec{f}_{ij}$
+will only depend on the separation of the bodies \ie on $\vec{r}_i -
+\vec{r}_j$ only. The force is antisymmetric when indexes are interchanged
+\ie $\vec{f}_{ij} = -\vec{f}_{ji}$. 
+
+The force $\vec{f}_{ij}$, is related to the potential $u$, as
+
+\begin{equation}
+  \vec{f}_{ij} = - \nabla u(r_{ij})
+\end{equation}
+
+The potential is the model of the system; it covers the details on how
+the bodies or particles interact. A celebrated potential is the
+Lennard-Jones potential which is
+
+\begin{equation}
+  u_{\smbox{LJ}} = 4\epsilon \left[\left(\frac{\sigma}{r}\right)^{12}
+    - \left(\frac{\sigma}{r}\right)^6 \right]
+\end{equation}
+where the parameter $\sigma$ is the characteristic length scale and
+$\epsilon$ is the energy scale. The Lennard-Jones potential is often
+used when simple liquids (\eg argon and methane) are simulated. The
+parameters are determined by the substance under investigation.
+
+%\subsection{Ergodicity}
+%\label{sect:MachErgodic}
+%Let us define the term phase space. The phase space is the space which
+%is spanned by the independent coordinates of our many-body problem. If
+%we have $N$ point-particles, we have $6N$ coordinates or degrees of
+%freedom. The phase space is then a $6N$-dimensional vector space which
+%we will denote $\Omega$.
+%
+%Let us now define the concept ergodicity. First consider a subspace of
+%the phase space \ie the set $S = [x_1; x_1 +\Delta]\times [y_1; y_1 +
+%\Delta] \times \cdots \times [z_N; z_N+\Delta] 
+%\times [p^x_1; p^x_1+\Delta p]\times [p^y_1; p^y_1 + \Delta p]
+%\times \cdots \times [p^z_N; p^z_N+\Delta p]$ where $x_i$ is the
+%$x$ position of the $i$th particle and $p^x_i$ is the $x$-component of
+%the momentum of the $i$th particle. Moreover, let $\rho(S)$ denote the
+%probability of finding the $N$-particle system in $S$. We are now able
+%to compute the (ensemble) average of a physical quantity $X$ as
+%
+%\begin{equation}
+%  \langle X \rangle = \int_{\Omega} X(S) \rho(S) \mathrm{d}S
+%\end{equation}
+%
+%We can also compute another average, namely the time average of the
+%quantity $X$. The time average is
+%
+%\begin{equation}
+%  \overline{X} = \lim_{t\rightarrow \infty} \frac{1}{t} \int_0^t
+%X(T)\mathrm{d}T
+%\end{equation}
+%
+%Then the system is ergodic if (and only if) $\langle X \rangle =
+%\overline{X}$. From a simulational point of view, the Monte
+%Carlo method computes ensemble averages while Molecular Dynamics
+%computes time averages.
+%
+%The definition of the ergodicity presented above has the following
+%physical meaning: the many-body system defined by the equations of
+%motion will visit all points in the phase space equally often. 
+
+
+\section{Statistical mechanics}
+\label{sect:SM}
+Statistical mechanics is a formal (mathematically rigorous) procedure
+which connects the microscopic world (atoms, molecules) with the
+macroscopic world. The procedure is statistical in nature \ie it can be
+used for computing averages instead of detailed dynamics. 
+
+For example, a glass of water ($0.2$ litre) contains $11.1 \mol$ or
+$6.7\cdot 10^{24}$ molecules. Each water molecule has 18 degrees of
+freedom, saying a glass of water has $2\times 10^{26}$ degrees of
+freedom. Just storing a snapshot (all degrees of freedom at one
+point in time) would require $3.6\cdot 10^{17} \GB$ assuming
+only single precision. If a harddisk is $10^{-3} \meter$ thick,
+and we use $3.6 \GB$ disks, the stack of harddisks would be $10^{14}
+\meter$ tall. This should be compared to the distance between the earth
+and the sun which is $1.5\cdot 10^{11} \meter$. This example clearly
+shows that knowledge of the detailed dynamics of the water molecules in
+a glass is impossible, and it serves as the motivation for introducing
+statistical mechanics in order to obtain knowledge of many-body systems. 
+
+Since this chapter is \textbf{not} intended to be a complete tutorial of
+statistical mechanics, let me therefore mention two textbooks, I have
+enjoyed reading:
+
+\begin{itemize}
+\item Huang \cite{Huang87} gives an easy introduction. The text is not
+rigorous and it serves as a gentle introduction of the key ideas. The
+book must be considered as a ``classical'' text in the sense that it
+has a physical origin.
+
+\item Andersen \cite{Andersen} is a ``modern'' text. ``Modern'' refers
+to the way the topic is approached - Andersen uses probability theory
+and information theory and deduces first a general statistical
+mechanics which he later applies to physical systems. 
+\end{itemize}
+
+\subsection{Ensembles}
+\label{sect:Ensembles}
+An ensemble can defined in many different ways, and we will use a
+pragmatic definition. 
+
+We define an ensemble as a many-body system where a number of
+thermodynamical variables are fixed. Two ensembles are of interest
+in this thesis; the microcanonical and the canonical ensemble. An
+ensemble defines the macroscopic state of the system, and the dynamics
+is defined by a Hamiltonian.
+
+The microcanonical ensemble is an $NVE$ ensemble \ie it is a system
+where the number of particles $N$, the volume $V$ and the total energy
+$E$ are constant. The Hamiltonian which describes the microcanonical
+ensemble is the Hamiltonian in equation \eqref{eq:HamilSimple}.
+
+The canonical ensemble is in many aspects more interesting. The three
+variables which are constant, are the number of particles, the volume,
+and the temperature. In section \ref{sect:ExtDynamics} we will discuss
+the Hamiltonian for this ensemble.
+
+
+\subsection{The partition function}
+\label{sect:PartFunc}
+One of the key concept in statistical mechanics is the partition function.
+Let us assume that $\cal{H}$ is the Hamiltonian of a many-body system.
+The canonical partition function $Q_N$, for an $N$-particle system is
+then given as 
+
+\begin{equation}
+  Q_N(T, V) = \frac{1}{h^{3N} N!} \int \exp(-\beta\mathcal{H})
+  \mathrm{d}\vec{r}^N\mathrm{d}\vec{p}^N
+\end{equation}
+where $T$ is the temperature, $V$ the volume, $h$ is a normalisation
+constant, and $\beta$ is $1/k_B T$. The
+integration is over the positions and momenta of all particles. We have
+$6N$ integrals which in most cases is impossible to solve
+analytically. In section \ref{sect:IdealGas} we will consider a system
+which can be treated analytically.
+
+
+\subsection{Thermodynamics and fluctuations}
+\label{sect:Thermo}
+The aim of statistical mechanics is to calculate thermodynamic
+properties from the knowledge of the microscopic details of a
+many-body system. One simple relation connects the macroscopic world
+with its microscopic details. The connection relates the (Helmholtz)
+free energy $A$, and the (canonical) partition function $Q_N$ as
+
+\begin{equation}
+  \label{eq:MicroMacro}
+   A = -k_B T \log Q_N(T, V)
+\end{equation}
+
+In principle all thermodynamical quantities can trivially be derived
+from this point. In reality, the partition function is only possible
+to compute exactly for a few examples, and computer simulations are the
+only possible way of examining the problem of interest. In the
+remaining part of the section we will look at a few consequences of
+equation \eqref{eq:MicroMacro}.
+
+Consider the internal energy, $U$. From a thermodynamical point of view
+it is given by \cite{Atkins94}
+
+\begin{equation}
+\label{eq:InternEner1}
+  U = \left( \pdiff{(A/T)}{(1/T)} \right)_V
+\end{equation}
+
+The internal energy is equivalent to the total energy for the
+microscopic system. The total energy, $E_{\smbox{tot}}$, fluctuates
+(we are now considering the system with fixed temperature \ie a closed
+system, and not an isolated system) around the mean value. The internal
+energy is therefore the average of the total energy, and so we have:
+
+\begin{equation}
+\label{eq:InternEner2}
+  U = \langle \mathcal{H} \rangle = -\left(\pdiff{\log Q_N(T, V)}{\beta}
+  \right)_V
+\end{equation}
+
+The heat capacity (at constant volume) is in thermodynamics defined as
+
+\begin{equation}
+  C_V \equiv \left( \pdiff{U}{T} \right)_V
+\end{equation}
+
+Loosely speaking, the heat capacity is a measure of the energy
+required to heat a system one degree. Using equation \eqref{eq:MicroMacro},
+equation \eqref{eq:InternEner1}, and equation \eqref{eq:InternEner2} we obtain
+an expression for the heat capacity:
+
+\begin{equation}
+\label{eq:HeatCap}
+  C_V = \frac{1}{k_B T^2} \left( \langle\mathcal{H}^2\rangle -
+    \langle\mathcal{H}\rangle^2 \right)
+\end{equation}
+
+We see that the heat capacity is a statistical quantity, namely the
+mean-square deviation of the total energy. The exciting point about equation
+\eqref{eq:HeatCap} is that heat capacity can be calculated from a
+system in equilibrium -
+we do not have to use the experimental procedure \ie we do not have to
+add energy and see the temperature raise in order to find the
+heat capacity. Equation \eqref{eq:HeatCap} is a special case of a more
+general theorem called the fluctuation-dissipation theorem
+\cite{Huang87}.
+
+
+\section{An example}
+\label{sect:IdealGas}
+In this section we will consider a simple system. We examine $N$
+identical particles with mass $m$. The Hamiltonian of the system is:
+
+\begin{equation}
+\label{eq:IdealGasHamil}
+  \mathcal{H} = \frac{1}{2m} \sum_{i=1}^N \vec{p}_i^2
+\end{equation}
+
+The equations of motion is easy to derive. They are:
+
+\begin{subequations}
+  \begin{eqnarray}
+    \diff{\vec{r}_i}{t} &=& \frac{\vec{p}_i}{m} \\
+    \diff{\vec{p}_i}{t} &=& \vec{0}
+  \end{eqnarray}
+\end{subequations}
+
+The equations of motion show that the molecules in a system with a
+Hamiltonian given by equation \eqref{eq:IdealGasHamil} do not interact.
+The molecules move in straight lines. The canonical partition function
+can be evaluated. The integration over the positions gives us $V^N$,
+while the integration over momenta is an integration of a
+Gaussian function. The partition function is:
+
+\begin{equation}
+  Q_N(V, T) = \frac{1}{h^{3N}N!} V^N \left(\sqrt{\frac{2\pi m}{\beta}}\right)^N
+\end{equation}
+
+The Helmholtz free energy $A$, links us to the thermodynamics of our system,
+and we obtain
+
+\begin{equation}
+  A = k_B T (N\log V + \frac{N}{2}(\log(2\pi m) - \log(\beta)) -
+    \log(h^{3N}N!)
+\end{equation}
+
+The free energy is not interesting on its own. The pressure of the $N$
+molecules is more interesting since it can easily be measured. The
+pressure $P$ is
+
+\begin{eqnarray*}
+  P &=& - \left(\pdiff{A}{V}\right)_T \\
+    &=& -k_B T \left(\pdiff{N\log V}{V}\right)_T \\
+    &=& \frac{Nk_B T}{V}
+\end{eqnarray*}
+which is the equation of state of an ideal gas. That is, an ideal gas
+is a system where gas molecules do not interact. Moreover, the ideal
+gas is one of the few microscopic system which we can solve
+analytically.
+
+
+\section{Extended dynamics}
+\label{sect:ExtDynamics}
+The Hamiltionian in equation \eqref{eq:HamilSimple} describes the
+dynamics in the microcanonical ensemble. In 1984 Nos\'{e} \cite{Nose84}
+published paper about a Hamiltonian which can describe the dynamics in
+the canonical ensemble. Since most of our simulations reported in this
+thesis have been performed in the canonical ensemble using equations of
+motion derived from Nos\'{e}'s Hamiltonian, we will discuss his
+Hamiltonian.
+
+The Hamiltonian $\mathcal{H}$ is
+
+\begin{equation}
+\label{eq:HamilNose}
+  \mathcal{H} = \sum_{i=1}^N \frac{\vec{p}_i^2}{2m_i s^2} + V(\vec{r})
+     + \frac{p_s^2}{2Q} + gk_B T\log s
+\end{equation}
+where the two variables $s$ and $p_s$ is the extension of the simple
+Hamiltonian. The idea is that the particles are coupled to a heat bath
+which is modelled by $s$ and $p_s$. The relaxation time of the
+thermostat is $Q$. The parameter $g$ is the degree of freedom (plus
+one).
+
+The (microcanonical) partition function associated with $\mathcal{H}$ is
+
+\begin{equation}
+  Q = \frac{1}{N!} \iiiint \delta(\mathcal{H}-E) \mathrm{d}\vec{r}
+       \mathrm{d}\vec{p} \mathrm{d}s \mathrm{d}p_s
+\end{equation}
+where $\delta(\cdot)$ is the Dirac delta function. We now introduce a
+new variable, $\vec{p}^{\prime}_i$ as $\vec{p}_i/s$, and we have
+$\mathrm{d}\vec{p} = \mathrm{d}(\vec{p}^{\prime} s) =
+s^{g-1}\mathrm{d}\vec{p}^{\prime}$. Moreover, let
+$\mathcal{H}^{\prime}$ be
+
+\[
+  \mathcal{H}^{\prime} = \sum_{i=1}^N \frac{(\vec{p}_i^{\prime})^2}{2m_i s} + V(\vec{r})
+\]
+
+The partition function can now be rewritten as
+
+\begin{equation}
+  Q = \frac{1}{N!} \iiiint s^{g-1} \delta(\mathcal{H}^{\prime} +
+      \frac{p_s^2}{2Q} + g k_B T \log s - E)
+      \mathrm{d}\vec{r}\mathrm{d}\vec{p}^{\prime}
+      \mathrm{d}s\mathrm{d}p_s
+\end{equation}
+
+We can apply the following property of the delta function:
+
+\[
+  \delta(h(s)) = \frac{\delta(s-s_0)}{h^{\prime}(s)}
+\]
+where $s_0$ is the root of the function $h$ and $h^{\prime}$ is the
+derivative of $h$. If we let $h$ be
+
+\[
+  h(s) = \mathcal{H}^{\prime} + \frac{p_s^2}{2Q} + gk_b T \log s - E
+\]
+
+we find $s_0$ to be
+
+\[
+  s_0 = \exp\left(-\frac{\mathcal{H}^{\prime} + p_s^2/2Q - E}{gk_B T}\right)
+\]
+
+and the derivative is $h^{\prime}(s) = gk_B T/s$. Finally the delta
+function can be evaluated to be
+
+\begin{equation}
+  \delta(h(s)) = \delta\left(s- \exp\left(-\frac{\mathcal{H}^{\prime} + p_s^2/2Q
+                 - E}{gk_B T}\right) \right) \frac{s}{gk_B T}
+\end{equation}
+
+Using that the integration of $p_s$ is the integration of a Gaussian
+function, we obtain
+
+\begin{equation}
+  Q = \frac{1}{g} \sqrt{\frac{2\pi Q}{k_B T}} \exp(E/k_B T) Q_N
+\end{equation}
+where $Q_N$ is
+
+\begin{equation}
+  Q_N = \frac{1}{N!} \iint \exp\left(-\frac{\mathcal{H}^{\prime}}{k_B T}\right)
+                      \mathrm{d}\vec{p}^{\prime} \mathrm{d}\vec{r}
+\end{equation}
+
+The partition function $Q_N$ is the partition function of a canonical
+ensemble, and since we have $Q \propto Q_N$ we see that the ensemble
+generated by the Hamiltonian in equation \eqref{eq:HamilNose} is the
+canonical ensemble.
+
+The equations of motion which generates the dynamics of particles
+coupled to a heat bath can be reduced further. Hoover \cite{Hoover85}
+has shown that one variable is sufficient in order to describe the motion
+of the particles.
+
+It is important to stress that the instantaneous temperature is not constant.
+The instantaneous temperture $\Theta$ is given as
+
+\begin{equation}
+  \frac{g-1}{2} k_B \Theta = \sum_{i=1}^N \frac{\vec{p}_i^2}{2m_i s^2}
+\end{equation}
+
+The instantaneous temperature fluctuates, but the mean value $\langle
+\Theta \rangle$ is the equilibrium temperature \ie $\langle \Theta
+\rangle = T$. 
+
+This extension of the equations of motion is often referred to as the
+Nos\'{e}-Hoover thermostat, and in chapter \ref{chap:NumTech} we will
+discuss an algorithm which implements the Nos\'{e}-Hoover thermostat.
